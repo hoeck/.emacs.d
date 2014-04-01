@@ -18,7 +18,7 @@
  '(espresso-indent-level 4)
  '(ethan-wspace-errors (quote (many-nls-eof no-nl-eof eol)))
  '(fill-column 78)
- '(flymake-jslint-args (quote ("--white" "--undef" "--nomen" "--regexp" "--plusplus" "--bitwise" "--newcap" "--sloppy" "--vars" "--eqeq" "--browser" "--predef $")))
+ '(flymake-jslint-args (quote ("--white" "--undef true" "--nomen" "--regexp" "--plusplus" "--bitwise" "--browser" "--predef $" "--predef jQuery")))
  '(global-font-lock-mode t nil (font-lock))
  '(ido-default-buffer-method (quote selected-window))
  '(ido-everywhere t)
