@@ -1,0 +1,6 @@
+# Log something to stderr using pprint.pformat
+# name: stderr pformat
+# expand-env: ((yas/indent-line 'auto))
+# --
+from sys import stderr; from pprint import pformat
+print >> stderr, "DEBUG:", pformat($0), "\n"

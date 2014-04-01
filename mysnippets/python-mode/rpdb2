@@ -1,0 +1,4 @@
+# Import and invoke the remote python debugger 2
+# name : rpdb2
+# --
+import rpdb2; rpdb2.start_embedded_debugger('a');

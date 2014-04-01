@@ -1,0 +1,7 @@
+# Singleline stacktrace of the current stack to sys.stderr
+# name : simpletraceback
+# --
+import traceback; import sys; import os;
+print >> sys.stderr, "STACK",
+print >> sys.stderr, "%s: " % os.path.basename(traceback.extract_stack()[0][0]),
+print >> sys.stderr, " -> ".join(f for _,_,f,_ in traceback.extract_stack()[1:])

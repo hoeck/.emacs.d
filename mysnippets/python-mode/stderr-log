@@ -1,0 +1,4 @@
+# Log something to stderr
+# name: stderrlog
+# --
+import sys; print >> sys.stderr, "DEBUG:", $0
