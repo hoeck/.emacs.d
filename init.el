@@ -420,23 +420,6 @@ Example (-!- is the point):
 (yas/load-directory yas/root-directory)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; mozrepl & js/espresso
-(when nil ;; disabled for now
-  (add-to-list 'load-path "~/.emacs.d/my-packages/mozrepl")
-  (require 'moz)
-  (autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t))
-
-;; Restart Emacs, and every time you open a Javascript file, you will now
-;; have the following keybindings available:
-;;     * C-c C-s: open a MozRepl interaction buffer and switch to it
-;;     * C-c C-l: save the current buffer and load it in MozRepl
-;;     * C-M-x: send the current function (as recognized by c-mark-function) to MozRepl
-;;     * C-c C-c: send the current function to MozRepl and switch to the interaction buffer
-;;     * C-c C-r: send the current region to MozRepl
-;; In the interaction buffer:
-;;     * C-c c: insert the current name of the REPL plus the dot operator (usually repl.)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; javascript
 (require 'paredit) ;; for paren navigation in js buffers
 (defun js-custom-setup ()
