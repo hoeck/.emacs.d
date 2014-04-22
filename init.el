@@ -134,27 +134,9 @@
 (delete-selection-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; colors, mostly font-lock
+;;; colors
 (require 'font-lock)
-(set-face-background 'default "RGB:FFFF/EAF6/CB8B")
-(set-face-foreground 'default "black")
-(set-face-background 'show-paren-match "GoldenRod1")
-;; font locks
-(set-face-foreground 'font-lock-comment-face "#d12f00");;"#ed1600") ;;"#e8410c") ;;"#E82C0C") ;;OrangeRed2
-
 (set-face-foreground 'font-lock-string-face "green4")
-(set-face-foreground 'font-lock-doc-face "green4")
-(set-face-foreground 'font-lock-function-name-face "MediumBlue")
-(set-face-foreground 'font-lock-keyword-face "CornflowerBlue") ; lisp 'reserved makros' (if then else defun ...)
-;;(set-face-foreground 'font-lock-reference-face "DarkOrange2") ; lisp ':keywords'
-(set-face-foreground 'font-lock-variable-name-face "#7F0C00") ;; SandyBrown2") ;;SandyBrown")
-(set-face-foreground 'font-lock-type-face "cyan3")
-(set-face-foreground 'font-lock-constant-face "LightSalmon2")
-(set-face-foreground 'font-lock-warning-face "DarkKhaki")
-(set-face-foreground 'font-lock-preprocessor-face "SpringGreen")
-
-(set-face-background 'fringe "RGB:EFFF/DAF6/AB8B")
-(set-face-background 'cursor "#000000")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; redefine some paredit keys
