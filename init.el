@@ -354,16 +354,28 @@ start of the next string - just skip the string delim char."
 ;;                                   (nnimap-stream ssl)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (add-to-list 'load-path "~/src/clojure-mode")
-;; (require 'clojure-mode)
+;; clojure
+(defun nrepl-eval-last-expression-pprint (&optional prefix)
+  "Evaluate the expression preceding point and pprint into the current buffer."
+  (interactive)
+  (let* ((buffer (current-buffer))
+         (handler (nrepl-make-response-handler buffer
+                                               '()
+                                               (lambda (buffer str)
+                                                 (with-current-buffer  buffer
+                                                   (dolist (x (butlast (split-string str "\n")))
+                                                     (insert (format ";;> %s\n" x)))))
+                                               (lambda (buffer str)
+                                                 (nrepl-emit-into-popup-buffer buffer str))
+                                               '())))
+    (insert "\n")
+    (nrepl-send-string (format "(clojure.pprint/pprint %s)" (nrepl-last-expression))
+                       handler
+                       (nrepl-current-ns))))
 
-;;; clojure & slime
-;; (add-to-list 'load-path "~/clj/clojure-mode")
-;; (add-to-list 'load-path "~/clj/swank-clojure")
-;; (add-to-list 'load-path "~/src/clojure-mode")
-;; (require 'clojure-mode)
-;; (define-key slime-mode-map [(control j)] 'slime-eval-print-last-expression)
-;; (add-hook 'slime-repl-mode-hook 'swank-clojure-slime-repl-modify-syntax)
+(eval-after-load "nrepl-interaction-autoload"
+  '(progn
+     (define-key nrepl-interaction-mode-map [(control \j)] 'nrepl-eval-last-expression-pprint)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; python mode customs
