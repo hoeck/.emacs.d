@@ -421,18 +421,30 @@ Example (-!- is the point):
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; javascript
+
+;; currently I like js2-mode more (saner indentation and flymake runs jslint just fine)
 (require 'paredit) ;; for paren navigation in js buffers
 (defun js-custom-setup ()
-  (define-key js3-mode-map [(meta left)] 'paredit-backward)
-  (define-key js3-mode-map [(meta right)] 'paredit-forward))
-(add-hook 'js3-mode-hook 'js-custom-setup)
-(add-hook 'js3-mode-hook 'flymake-jslint-load)
+  (define-key js2-mode-map [(meta left)] 'paredit-backward)
+  (define-key js2-mode-map [(meta right)] 'paredit-forward))
+(add-hook 'js2-mode-hook 'js-custom-setup)
+(add-hook 'js2-mode-hook 'flymake-jslint-load)
+
+;; keep j3 mode around though, just don't autoload it
+;; see http://www.emacswiki.org/emacs/ELPA for how to configuring ELPA packages
+(eval-after-load "js3-mode-autoloads"
+  '(progn
+     (setq auto-mode-alist (delete (rassoc 'js3-mode auto-mode-alist) auto-mode-alist))))
+
+(eval-after-load "js2-mode-autoloads"
+  '(progn
+     (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+     (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; (require 'anything)
 ;; (require 'anything-config)
 ;; (require 'anything-match-plugin)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; (my)sql-completion
