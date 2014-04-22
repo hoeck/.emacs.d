@@ -18,7 +18,7 @@
  '(espresso-indent-level 4)
  '(ethan-wspace-errors (quote (many-nls-eof no-nl-eof eol)))
  '(fill-column 78)
- '(flymake-jslint-args (quote ("--white" "--undef true" "--nomen" "--regexp" "--plusplus" "--bitwise" "--browser" "--predef" "$" "--predef" "jQuery" "--maxerror" "16")))
+ '(flymake-jslint-args (quote ("--white" "--undef true" "--nomen" "--regexp" "--plusplus" "--bitwise" "--browser" "--nomen" "--predef" "$" "--predef" "jQuery" "--maxerror" "16")))
  '(flymake-jslint-command "jslint")
  '(flymake-jslint-detect-trailing-comma t)
  '(global-font-lock-mode t nil (font-lock))
