@@ -3,6 +3,21 @@
 ;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; artist-mode (ascii art)
+
+;; artist binds C-cC-c to artist-mode-off for leaving artist
+(autoload 'artist-mode "artist" "Enter artist-mode" t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; re-builder
+
+;; interactively build and test regexes
+(require 're-builder)
+;; use the same regexp syntax as in m-x *-regexp commands
+;; (defaults to 'read: the syntax used in elisp strings where each '\' has to be quoted)
+(setq reb-re-syntax 'string)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; comint mode
 
 ;; Shell mode colors (m-x shell)

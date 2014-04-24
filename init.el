@@ -8,6 +8,10 @@
 ;;; Author: Werner Fink, <feedback@suse.de> 2002
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; slim loading, skip expensive inits, see slim-init.el and ~/bin/em
+(when (not (boundp 'slim-init))
+  (defvar slim-init nil))
+
 (setq custom-file "~/.emacs.d/custom.el")
 (add-to-list 'load-path "~/.emacs.d")
 
@@ -23,6 +27,7 @@
 ;;; get rid of ui chrome
 (menu-bar-mode 0)
 (tool-bar-mode 0)
+(setq inhibit-splash-screen t)
 
 ;;; show paren match mode
 (show-paren-mode 2)
@@ -49,12 +54,6 @@
 
 ;; Interactively Do Things
 (require 'ido)
-
-;; re-builder: interactively build and test regexes
-(require 're-builder)
-;; use the same regexp syntax as in m-x *-regexp commands
-;; (defaults to 'read: the syntax used in elisp strings where each '\' has to be quoted)
-(setq reb-re-syntax 'string)
 
 ;;         _     _____    _     __   ___      _
 ;; |\  |  / \      |     /_\   |__> <___     | |
@@ -112,9 +111,6 @@
 ;; no one is editing files on the same computer anymore
 (fmakunbound 'lock-buffer)
 (defun lock-buffer (bla))
-
-;; artist binds C-cC-c to artist-mode-off for leaving artist
-(autoload 'artist-mode "artist" "Enter artist-mode" t)
 
 ;;; request syntax highlighting
 (global-font-lock-mode 1)
@@ -183,23 +179,26 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; packages
-(require 'package)
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+(when (not slim-init)
+  (require 'package)
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                           ("marmalade" . "http://marmalade-repo.org/packages/")
+                           ("melpa" . "http://melpa.milkbox.net/packages/")))
 
-;; manually control package loading (at the end of this file)
-(setq package-enable-at-startup nil)
+  ;; manually control package loading (at the end of this file)
+  (setq package-enable-at-startup nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; startup
-(package-initialize)
+(when (not slim-init) (package-initialize))
+
 (load "~/.emacs.d/custom.el" t t) ;; load custom options *after* initing the packages
 
-;; org files
-(find-file "~/org/notes.org")
-(find-file "~/org/current.org")
-(switch-to-buffer "notes.org")
+;; org files are required for my normal workspace
+(when (not slim-init)
+  (find-file "~/org/notes.org")
+  (find-file "~/org/current.org")
+  (switch-to-buffer "notes.org"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs strange/old custom options
