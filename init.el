@@ -178,27 +178,26 @@
 ;; commands: flop-frame, flip-frame, transpose-frame
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; packages
-(when (not slim-init)
-  (require 'package)
-  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                           ("marmalade" . "http://marmalade-repo.org/packages/")
-                           ("melpa" . "http://melpa.milkbox.net/packages/")))
-
-  ;; manually control package loading (at the end of this file)
-  (setq package-enable-at-startup nil))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; startup
-(when (not slim-init) (package-initialize))
-
-(load "~/.emacs.d/custom.el" t t) ;; load custom options *after* initing the packages
-
-;; org files are required for my normal workspace
 (when (not slim-init)
-  (find-file "~/org/notes.org")
-  (find-file "~/org/current.org")
-  (switch-to-buffer "notes.org"))
+    ;; fat startup
+    (require 'package)
+    (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                             ("marmalade" . "http://marmalade-repo.org/packages/")
+                             ("melpa" . "http://melpa.milkbox.net/packages/")))
+
+    ;; manually control package loading (at the end of this file)
+    (setq package-enable-at-startup nil)
+
+    (package-initialize)
+
+    (load "~/.emacs.d/custom.el" t t) ;; load custom options *after* initing the packages
+    (load "~/.emacs.d/init-packages.el" t t)
+
+    ;; org files are required for my normal workspace
+    (find-file "~/org/notes.org")
+    (find-file "~/org/current.org")
+    (switch-to-buffer "notes.org"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs strange/old custom options
