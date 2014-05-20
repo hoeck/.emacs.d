@@ -107,6 +107,8 @@ start of the next string - just skip the string delim char."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clojure
+(require 'nrepl)
+
 (defun nrepl-eval-last-expression-pprint (&optional prefix)
   "Evaluate the expression preceding point and pprint into the current buffer."
   (interactive)
@@ -125,9 +127,7 @@ start of the next string - just skip the string delim char."
                        handler
                        (nrepl-current-ns))))
 
-(eval-after-load "nrepl-interaction-autoload"
-  '(progn
-     (define-key nrepl-interaction-mode-map [(control \j)] 'nrepl-eval-last-expression-pprint)))
+(define-key nrepl-interaction-mode-map [(control \j)] 'nrepl-eval-last-expression-pprint)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; python mode customs
