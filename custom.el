@@ -22,6 +22,7 @@
  '(flymake-jslint-command "jslint")
  '(flymake-jslint-detect-trailing-comma t)
  '(global-font-lock-mode t nil (font-lock))
+ '(haskell-mode-hook (quote (capitalized-words-mode turn-on-haskell-decl-scan turn-on-haskell-doc turn-on-haskell-indent)))
  '(ido-default-buffer-method (quote selected-window))
  '(ido-everywhere t)
  '(ido-mode (quote both) nil (ido))
