@@ -109,8 +109,7 @@
 
 ;; don't create file-lock-symlicks (files startingwith ".#")
 ;; no one is editing files on the same computer anymore
-(fmakunbound 'lock-buffer)
-(defun lock-buffer (bla))
+(setq create-lockfiles nil)
 
 ;;; request syntax highlighting
 (global-font-lock-mode 1)
