@@ -7,6 +7,7 @@
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(c-offsets-alist (quote ((brace-list-intro . 0))))
  '(case-fold-search t)
+ '(coffee-tab-width 4)
  '(column-number-mode t)
  '(comint-history-isearch (quote dwim))
  '(comint-input-ring-file-name nil)
