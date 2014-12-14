@@ -250,8 +250,12 @@ Example (-!- is the point):
 (global-set-key [(control c)(j)]        'bc-goto-current)   ;; C-c j for jump to current bookmark
 (global-set-key [(control x)(meta j)]   'bc-list)           ;; C-x M-j for the bookmark menu list
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ispell - fix german dictionary
 (require 'ispell)
 (add-to-list 'ispell-dictionary-alist '("de_DE-neu" "[[:alpha:]]" "[^[:alpha:]]" "[']" t ("-C") "~tex" utf-8))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; company mode everywhere
+(add-hook 'after-init-hook 'global-company-mode)
+(global-set-key [(control .)] 'company-complete)
