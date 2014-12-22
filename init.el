@@ -13,7 +13,7 @@
   (defvar slim-init nil))
 
 (setq custom-file "~/.emacs.d/custom.el")
-(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/lisp")
 
 ;; eat up all whitespace when pressing C-d
 ;;(c-toggle-hungry-state 1)

@@ -51,8 +51,10 @@
      (comint-truncate-buffer)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; redefine some paredit keys
+;;; paredit
 (require 'paredit)
+(require 'paredit-everywhere)
+;; (require 'paredit)
 ;; (define-key paredit-mode-map "\C-j" nil) ;; use C-j for lisp-eval-print
 ;; (define-key paredit-mode-map ";" nil) ;; i want normal comments or a `comment-next-expr' function
 ;; (define-key paredit-mode-map ")" 'paredit-close-parenthesis)
@@ -63,37 +65,37 @@
 (global-set-key [(meta left)] 'paredit-backward)
 (global-set-key [(meta right)] 'paredit-forward)
 
-(eval-after-load 'paredit
-
-  '(progn
-     ;; do not treat strings as s-expressions when beeing inside them and trying to escape!
-     (defun paredit-at-string-start ()
-       (if (paredit-in-string-p)
-           (eql (+ 1 (first (paredit-string-start+end-points))) (point))))
-
-     (defun paredit-at-string-end ()
-       (if (paredit-in-string-p)
-           (eql (cdr (paredit-string-start+end-points)) (point))))
-
-     (defun-saving-mark paredit-backward ()
-       "like paredit-backward with different in-string movement.
-When at the start of a string, do not move to the
-end of the string before - just skip the string delim char."
-       (paredit-handle-sexp-errors
-           (if (paredit-at-string-start)
-               (backward-char)
-             (backward-sexp))
-         (if (paredit-in-string-p) (backward-char) (backward-up-list))))
-
-     (defun-saving-mark paredit-forward ()
-       "like paredit-forward with different in-string movement.
-When at the end of a string, do not move to the
-start of the next string - just skip the string delim char."
-       (paredit-handle-sexp-errors
-           (if (paredit-at-string-end)
-               (forward-char)
-             (forward-sexp))
-         (if (paredit-in-string-p) (forward-char) (up-list))))))
+;; (eval-after-load 'paredit
+;;
+;;   '(progn
+;;      ;; do not treat strings as s-expressions when beeing inside them and trying to escape!
+;;      (defun paredit-at-string-start ()
+;;        (if (paredit-in-string-p)
+;;            (eql (+ 1 (first (paredit-string-start+end-points))) (point))))
+;;
+;;      (defun paredit-at-string-end ()
+;;        (if (paredit-in-string-p)
+;;            (eql (cdr (paredit-string-start+end-points)) (point))))
+;;
+;;      (defun-saving-mark paredit-backward ()
+;;        "like paredit-backward with different in-string movement.
+;; When at the start of a string, do not move to the
+;; end of the string before - just skip the string delim char."
+;;        (paredit-handle-sexp-errors
+;;            (if (paredit-at-string-start)
+;;                (backward-char)
+;;              (backward-sexp))
+;;          (if (paredit-in-string-p) (backward-char) (backward-up-list))))
+;;
+;;      (defun-saving-mark paredit-forward ()
+;;        "like paredit-forward with different in-string movement.
+;; When at the end of a string, do not move to the
+;; start of the next string - just skip the string delim char."
+;;        (paredit-handle-sexp-errors
+;;            (if (paredit-at-string-end)
+;;                (forward-char)
+;;              (forward-sexp))
+;;          (if (paredit-in-string-p) (forward-char) (up-list))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; org-mode
@@ -174,7 +176,7 @@ Example (-!- is the point):
       (message "No attribute at point."))))
 (define-key py-mode-map [(control .)] 'py-attrib-to-key)
 
-(require 'paredit) ;; for paren navigation
+;; (require 'paredit) ;; for paren navigation
 (define-key py-mode-map [(meta left)] 'paredit-backward)
 (define-key py-mode-map [(meta right)] 'paredit-forward)
 (define-key py-mode-map [(meta n)] 'py-next-statement)
@@ -184,15 +186,11 @@ Example (-!- is the point):
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ipython via py-shell
-(require 'ipython)
+;;(require 'ipython)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; YaSnippet v0.6.1c
-(add-to-list 'load-path"~/.emacs.d/yasnippet")
+;;; YaSnippet
 (require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/yasnippet/snippets")
-;; see http://yasnippet.googlecode.com/svn/trunk/doc/snippet-organization.html
 ;; Develop and keep personal snippets under ~/emacs.d/mysnippets
 (setq yas/root-directory "~/.emacs.d/mysnippets")
 (yas/load-directory yas/root-directory)
@@ -201,10 +199,10 @@ Example (-!- is the point):
 ;;; javascript
 
 ;; currently I like js2-mode more (saner indentation and flymake runs jslint just fine)
-(require 'paredit) ;; for paren navigation in js buffers
-(defun js-custom-setup ()
-  (define-key js2-mode-map [(meta left)] 'paredit-backward)
-  (define-key js2-mode-map [(meta right)] 'paredit-forward))
+;; (require 'paredit) ;; for paren navigation in js buffers
+;; (defun js-custom-setup ()
+;;   (define-key js2-mode-map [(meta left)] 'paredit-backward)
+;;   (define-key js2-mode-map [(meta right)] 'paredit-forward))
 (add-hook 'js2-mode-hook 'js-custom-setup)
 (add-hook 'js2-mode-hook 'flymake-jslint-load)
 

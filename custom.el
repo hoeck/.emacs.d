@@ -19,11 +19,15 @@
  '(espresso-indent-level 4)
  '(ethan-wspace-errors (quote (many-nls-eof no-nl-eof eol)))
  '(fill-column 78)
- '(flymake-jslint-args (quote ("--white" "--unparam" "--todo" "--nomen" "--regexp" "--plusplus" "--bitwise" "--browser" "--nomen" "--predef" "$" "--predef" "jQuery" "--maxerror" "16")))
+ '(flymake-jslint-args
+   (quote
+    ("--white" "--unparam" "--todo" "--nomen" "--regexp" "--plusplus" "--bitwise" "--browser" "--nomen" "--predef" "$" "--predef" "jQuery" "--maxerror" "16")))
  '(flymake-jslint-command "jslint")
  '(flymake-jslint-detect-trailing-comma t)
  '(global-font-lock-mode t nil (font-lock))
- '(haskell-mode-hook (quote (capitalized-words-mode turn-on-haskell-decl-scan turn-on-haskell-doc turn-on-haskell-indent)))
+ '(haskell-mode-hook
+   (quote
+    (capitalized-words-mode turn-on-haskell-decl-scan turn-on-haskell-doc turn-on-haskell-indent)))
  '(ido-default-buffer-method (quote selected-window))
  '(ido-everywhere t)
  '(ido-mode (quote both) nil (ido))
@@ -40,7 +44,9 @@
  '(org-refile-use-outline-path t)
  '(py-align-multiline-strings-p t)
  '(py-python-command "ipython")
- '(py-python-command-args (quote ("-i" "-colors" "LightBG" "-nobanner" "-noconfirm_exit")))
+ '(py-python-command-args
+   (quote
+    ("-i" "-colors" "LightBG" "-nobanner" "-noconfirm_exit")))
  '(py-shell-switch-buffers-on-execute nil)
  '(python-python-command "ipython")
  '(scroll-bar-mode (quote right))
@@ -49,10 +55,14 @@
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote expression))
  '(size-indication-mode t)
+ '(smartparens-global-mode nil)
+ '(sp-base-key-bindings (quote paredit))
  '(sql-pop-to-buffer-after-send-region nil)
  '(sql-product (quote mysql))
- '(swank-clojure-classpath (list "~/clj/clojure/clojure.jar" "~/clj/clojure-contrib/clojure-contrib.jar" "~/clj/swank-clojure/src/" "~/clj/neo4j-clojure/src" "~/src/neo4j-kernel-1.0-rc/*" "~/clj/clj-pivot/src" "~/clj/clj-pivot/classes" "~/clj/clj-pivot/examples/src" "~/clj/clj-pivot/examples/snippets" "~/clj/clj-pivot/icons" "~/src/apache-pivot-1.5/lib/*" "~/clj/tmp" "~/clj/spreadsheet-repl/src" "/usr/lib/jvm/java-6-sun/lib/tools.jar" "~/clj/clj-debug/src" "~/qm/src/" "~/clj/compojure/compojure.jar" "~/clj/compojure/deps/*" "~/clj/Clojure-yahoo-finance/lib/*" "~/clj/scriptjure/src" "~/clj/clojure-jna/src" "~/clj/cdc/src" "~/src/jnotify-src/jnotify/build/output/jnotify-0.93-PATCH.jar" "/usr/share/java/mysql.jar" "~/clj/metatron-experimental/src" "~/clj/metatron-experimental/build" "~/clj/criterium/src"))
- '(swank-clojure-extra-vm-args (list "-Xmx512M" "-Xdebug" "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8888" "-Djava.ext.dirs=/usr/share/java"))
+ '(swank-clojure-classpath
+   (list "~/clj/clojure/clojure.jar" "~/clj/clojure-contrib/clojure-contrib.jar" "~/clj/swank-clojure/src/" "~/clj/neo4j-clojure/src" "~/src/neo4j-kernel-1.0-rc/*" "~/clj/clj-pivot/src" "~/clj/clj-pivot/classes" "~/clj/clj-pivot/examples/src" "~/clj/clj-pivot/examples/snippets" "~/clj/clj-pivot/icons" "~/src/apache-pivot-1.5/lib/*" "~/clj/tmp" "~/clj/spreadsheet-repl/src" "/usr/lib/jvm/java-6-sun/lib/tools.jar" "~/clj/clj-debug/src" "~/qm/src/" "~/clj/compojure/compojure.jar" "~/clj/compojure/deps/*" "~/clj/Clojure-yahoo-finance/lib/*" "~/clj/scriptjure/src" "~/clj/clojure-jna/src" "~/clj/cdc/src" "~/src/jnotify-src/jnotify/build/output/jnotify-0.93-PATCH.jar" "/usr/share/java/mysql.jar" "~/clj/metatron-experimental/src" "~/clj/metatron-experimental/build" "~/clj/criterium/src"))
+ '(swank-clojure-extra-vm-args
+   (list "-Xmx512M" "-Xdebug" "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8888" "-Djava.ext.dirs=/usr/share/java"))
  '(table-cell-intersection-char 43)
  '(table-cell-vertical-char 124)
  '(tail-raise nil)
