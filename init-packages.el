@@ -126,27 +126,27 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; clojure
-(require 'nrepl)
+(require 'cider)
 
-(defun nrepl-eval-last-expression-pprint (&optional prefix)
-  "Evaluate the expression preceding point and pprint into the current buffer."
+(defun cider-eval-last-expression-pprint ()
   (interactive)
   (let* ((buffer (current-buffer))
-         (handler (nrepl-make-response-handler buffer
-                                               '()
-                                               (lambda (buffer str)
-                                                 (with-current-buffer  buffer
-                                                   (dolist (x (butlast (split-string str "\n")))
-                                                     (insert (format ";;> %s\n" x)))))
-                                               (lambda (buffer str)
-                                                 (nrepl-emit-into-popup-buffer buffer str))
-                                               '())))
+          (handler (nrepl-make-response-handler buffer
+                                                (lambda (buffer str)
+                                                  (with-current-buffer buffer
+                                                    (insert (format ";;> %s\n" str))))
+                                                (lambda (buffer str)
+                                                  (with-current-buffer buffer
+                                                    (dolist (x (butlast (split-string str "\n")))
+                                                      (insert (format ";;> %s\n" x)))))
+                                                (lambda (buffer str)
+                                                  (nrepl-emit-into-popup-buffer buffer str))
+                                                '())))
     (insert "\n")
-    (nrepl-send-string (format "(clojure.pprint/pprint %s)" (nrepl-last-expression))
-                       handler
-                       (nrepl-current-ns))))
+    (cider-interactive-eval (format "((if *clojure-version* clojure.pprint/pprint identity) %s)" (cider-last-sexp))
+                            handler)))
 
-(define-key nrepl-interaction-mode-map [(control \j)] 'nrepl-eval-last-expression-pprint)
+(define-key cider-mode-map [(control \j)] 'cider-eval-last-expression-pprint)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; python mode customs
