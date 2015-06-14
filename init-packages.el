@@ -199,11 +199,6 @@ Example (-!- is the point):
 ;;; javascript
 
 ;; currently I like js2-mode more (saner indentation and flymake runs jslint just fine)
-;; (require 'paredit) ;; for paren navigation in js buffers
-;; (defun js-custom-setup ()
-;;   (define-key js2-mode-map [(meta left)] 'paredit-backward)
-;;   (define-key js2-mode-map [(meta right)] 'paredit-forward))
-(add-hook 'js2-mode-hook 'js-custom-setup)
 (add-hook 'js2-mode-hook 'flymake-jslint-load)
 
 ;; keep j3 mode around though, just don't autoload it
