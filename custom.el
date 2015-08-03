@@ -50,6 +50,7 @@
  '(py-shell-switch-buffers-on-execute nil)
  '(python-python-command "ipython")
  '(scroll-bar-mode (quote right))
+ '(scss-compile-at-save nil)
  '(sgml-basic-offset 4)
  '(show-paren-delay 0)
  '(show-paren-mode t nil (paren))
