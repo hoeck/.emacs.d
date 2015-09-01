@@ -35,6 +35,7 @@
  '(js-auto-indent-flag nil)
  '(js-expr-indent-offset 4)
  '(js3-indent-level 4)
+ '(list-matching-lines-default-context-lines 1)
  '(nrepl-popup-on-error nil)
  '(nrepl-popup-stacktraces nil)
  '(nrepl-popup-stacktraces-in-repl nil)
