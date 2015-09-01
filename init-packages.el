@@ -252,3 +252,23 @@ Example (-!- is the point):
 ;; company mode everywhere
 (add-hook 'after-init-hook 'global-company-mode)
 (global-set-key [(control .)] 'company-complete)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Projectile - Project Interaction Library
+;; https://github.com/bbatsov/projectile
+(projectile-global-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Ace Jump
+;; http://www.emacswiki.org/emacs/AceJump
+(require 'ace-jump-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Buffer Move
+;; http://www.emacswiki.org/emacs/buffer-move.el
+(require 'buffer-move)
+(global-set-key (kbd "<C-S-up>")     'buf-move-up)
+(global-set-key (kbd "<C-S-down>")   'buf-move-down)
+(global-set-key (kbd "<C-S-left>")   'buf-move-left)
+(global-set-key (kbd "<C-S-right>")  'buf-move-right)
