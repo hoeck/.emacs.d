@@ -9,8 +9,11 @@
 ;; visual studio uses these keys too
 (global-set-key (kbd "<C-f2>") 'bm-toggle)
 (global-unset-key (kbd "<f2>"))
+(global-unset-key (kbd "<f3>"))
 (global-set-key (kbd "<f2>") 'bm-next)
-(global-set-key (kbd "<S-f2>") 'bm-previous)
+(global-set-key (kbd "<f3>") 'bm-previous)
+(global-set-key (kbd "<S-f2>") 'bm-first-in-next-buffer)
+(global-set-key (kbd "<S-f3>") 'bm-last-in-previous-buffer)
 
 ;; click on fringe to toggle bookmarks, and use mouse wheel to move between them
 (global-set-key (kbd "<left-fringe> <mouse-5>") 'bm-next-mouse)
