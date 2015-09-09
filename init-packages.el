@@ -198,8 +198,9 @@ Example (-!- is the point):
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; javascript
 
-;; currently I like js2-mode more (saner indentation and flymake runs jslint just fine)
-(add-hook 'js2-mode-hook 'flymake-jslint-load)
+;; I used to use flymake, but now its jscs + jshint. flycheck works
+;; flawlessly with two linters, so I don't need flymake any more.
+;; (add-hook 'js2-mode-hook 'flymake-jshint-load)
 
 ;; keep j3 mode around though, just don't autoload it
 ;; see http://www.emacswiki.org/emacs/ELPA for how to configuring ELPA packages
@@ -272,3 +273,25 @@ Example (-!- is the point):
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Flycheck JSCS
+;; https://github.com/jscs-dev/node-jscs
+(require 'flycheck)
+
+(flycheck-def-config-file-var flycheck-jscs javascript-jscs ".jscs.json" :safe #'stringp)
+
+(flycheck-define-checker javascript-jscs
+  "A JavaScript code style checker.
+See URL `https://github.com/mdevils/node-jscs'."
+  :command ("jscs" "--reporter" "checkstyle"
+            (config-file "--config" flycheck-jscs)
+            source)
+  :error-parser flycheck-parse-checkstyle
+  :modes (js-mode js2-mode js3-mode))
+
+(defun jscs-enable () (interactive)
+       (add-to-list 'flycheck-checkers 'javascript-jscs))
+
+(defun jscs-disable () (interactive)
+       (setq flycheck-checkers (remove 'javascript-jscs flycheck-checkers)))

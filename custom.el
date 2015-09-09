@@ -19,11 +19,13 @@
  '(espresso-indent-level 4)
  '(ethan-wspace-errors (quote (many-nls-eof no-nl-eof eol)))
  '(fill-column 78)
+ '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
  '(flymake-jslint-args
    (quote
     ("--white" "--unparam" "--todo" "--nomen" "--regexp" "--plusplus" "--bitwise" "--browser" "--nomen" "--predef" "$" "--predef" "jQuery" "--maxerror" "16")))
  '(flymake-jslint-command "jslint")
  '(flymake-jslint-detect-trailing-comma t)
+ '(global-flycheck-mode t)
  '(global-font-lock-mode t nil (font-lock))
  '(haskell-mode-hook
    (quote
@@ -43,6 +45,13 @@
  '(org-agenda-files (quote ("~/org/admin-journal.org" "~/org/notes.org")))
  '(org-outline-path-complete-in-steps nil)
  '(org-refile-use-outline-path t)
+ '(projectile-enable-caching t)
+ '(projectile-project-root-files
+   (quote
+    ("rebar.config" "project.clj" "SConstruct" "pom.xml" "build.sbt" "build.gradle" "Gemfile" "requirements.txt" "setup.py" "tox.ini" "package.json" "gulpfile.js" "Gruntfile.js" "bower.json" "composer.json" "Cargo.toml" "mix.exs" "main.js")))
+ '(projectile-project-root-files-bottom-up
+   (quote
+    (".projectile" ".git" ".hg" ".fslckout" ".bzr" "_darcs")))
  '(py-align-multiline-strings-p t)
  '(py-python-command "ipython")
  '(py-python-command-args
