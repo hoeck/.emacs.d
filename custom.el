@@ -30,6 +30,7 @@
  '(haskell-mode-hook
    (quote
     (capitalized-words-mode turn-on-haskell-decl-scan turn-on-haskell-doc turn-on-haskell-indent)))
+ '(helm-buffer-details-flag nil)
  '(ido-default-buffer-method (quote selected-window))
  '(ido-everywhere t)
  '(ido-mode (quote both) nil (ido))
@@ -102,9 +103,9 @@
  '(idle-highlight ((t (:inherit nil :background "PeachPuff2"))))
  '(mode-line ((((class color) (min-colors 88)) (:background "grey90" :foreground "black" :box (:line-width -1 :color "grey75")))))
  '(mode-line-inactive ((default (:inherit mode-line)) (((class color) (min-colors 88) (background light)) (:background "grey75" :foreground "grey20" :box (:line-width -1 :style released-button) :weight light))))
- '(outline-2 ((t (:foreground "#228d00"))))
- '(outline-3 ((t (:foreground "tomato3"))))
- '(outline-4 ((t (:foreground "gold3"))))
+ '(outline-2 ((t (:foreground "#2b2bd5"))))
+ '(outline-3 ((t (:foreground "#7777ea"))))
+ '(outline-4 ((t (:foreground "#88a"))))
  '(outline-5 ((t (:foreground "dodgerblue"))))
  '(outline-6 ((t (:foreground "darkorchid3"))))
  '(region ((((class color) (min-colors 88) (background light)) (:background "grey75"))))
