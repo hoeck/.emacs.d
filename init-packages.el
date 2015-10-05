@@ -298,3 +298,34 @@ See URL `https://github.com/mdevils/node-jscs'."
 
 (defun jscs-disable () (interactive)
        (setq flycheck-checkers (remove 'javascript-jscs flycheck-checkers)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Tern (http://ternjs.net)
+
+(add-to-list 'load-path "~/src/tern/emacs/")
+(autoload 'tern-mode "tern.el" nil t)
+
+(eval-after-load 'tern
+   '(progn
+      (require 'tern-auto-complete)
+      (tern-ac-setup)))
+
+(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+
+;; The Emacs mode uses the bin/tern server, and project configuration is done
+;; with a .tern-project file.
+;;
+;; Buffers in tern-mode add a completion-at-point function that activates Tern’s
+;; completion. So, unless you rebound the key, M-tab (or C-M-i) will trigger
+;; completion.
+;;
+;; When the point is in an argument list, Tern will show argument names and types
+;; at the bottom of the screen.
+;;
+;; The following additional keys are bound:
+;;
+;; M-.     .. Jump to the definition of the thing under the cursor.
+;; M-,     .. Brings you back to last place you were when you pressed M-..
+;; C-c C-r .. Rename the variable under the cursor.
+;; C-c C-c .. Find the type of the thing under the cursor.
+;; C-c C-d .. Find docs of the thing under the cursor. Press again to open the associated URL (if any).
