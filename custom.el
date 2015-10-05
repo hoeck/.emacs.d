@@ -37,6 +37,7 @@
  '(ipython-command "ipython")
  '(js-auto-indent-flag nil)
  '(js-expr-indent-offset 4)
+ '(js2-indent-switch-body t)
  '(js3-indent-level 4)
  '(list-matching-lines-default-context-lines 1)
  '(nrepl-popup-on-error nil)
