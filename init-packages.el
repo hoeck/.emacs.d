@@ -329,3 +329,8 @@ See URL `https://github.com/mdevils/node-jscs'."
 ;; C-c C-r .. Rename the variable under the cursor.
 ;; C-c C-c .. Find the type of the thing under the cursor.
 ;; C-c C-d .. Find docs of the thing under the cursor. Press again to open the associated URL (if any).
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Shackle (https://github.com/wasamasa/shackle)
+;; enforce rules for popup windows
+(require 'shackle)
