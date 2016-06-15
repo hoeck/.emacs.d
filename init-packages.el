@@ -267,11 +267,16 @@ Example (-!- is the point):
 (setq company-idle-delay 1.5)
 
 (global-set-key [(control .)] 'company-complete)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Helm Global Mode!
+(helm-mode 1)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile - Project Interaction Library
 ;; https://github.com/bbatsov/projectile
 (projectile-global-mode)
+(setq projectile-switch-project-action 'helm-projectile)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ace Jump
@@ -385,7 +390,9 @@ See URL `https://github.com/eslint/eslint'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Shackle (https://github.com/wasamasa/shackle)
 ;; enforce rules for popup windows
-(require 'shackle)
+;; does not work with helms built-in documentation via C-c ? or C-h m
+;; (require 'shackle)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Highlight Symbol Mode
 (require 'highlight-symbol)
