@@ -437,3 +437,16 @@ See URL `https://github.com/eslint/eslint'."
 
 (add-hook 'js-mode-hook 'highlight-symbol-mode)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; neotree global commands
+(require 'neotree)
+
+(defun neotree-force-find ()
+  (interactive)
+  (when (get-buffer "*NeoTree*")
+    (message "killing neotree buffer")
+    (kill-buffer "*NeoTree*"))
+  (neotree-show)
+  (neotree-find))
+
+(define-key my-keys-minor-mode-map (kbd "C-c C-n") 'neotree-force-find)
