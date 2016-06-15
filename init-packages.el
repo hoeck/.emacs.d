@@ -165,26 +165,6 @@
 
 (define-key py-mode-map (read-kbd-macro "TAB") 'py-indent-line)
 
-(defun py-attrib-to-key ()
-  "Convert a python attribute expression to a key lookup expression.
-
-Example (-!- is the point):
-
-  object.attribute_name-!-    => object['attribute_name']-!-
-  object.attr-!-ibute_name    => object['attribute_name']-!-
-"
-  (interactive)
-  (let* ((bounds (bounds-of-thing-at-point 'word))
-         (start (car bounds))
-         (end (cdr bounds)))
-    (if (and bounds
-             (string= (buffer-substring (- start 1) start) "."))
-        (let* ((word (delete-and-extract-region (- start 1) end))
-               (key (format "['%s']" (substring word 1))))
-          (insert key))
-      (message "No attribute at point."))))
-(define-key py-mode-map [(control .)] 'py-attrib-to-key)
-
 ;; (require 'paredit) ;; for paren navigation
 (define-key py-mode-map [(meta left)] 'paredit-backward)
 (define-key py-mode-map [(meta right)] 'paredit-forward)
