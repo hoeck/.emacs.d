@@ -108,7 +108,7 @@
 (setq org-log-done t)
 
 ;; files to search through for agenda view
-(setq org-agenda-files (list "~/org/notes.org"))
+(setq org-agenda-files (list "~/org"))
 
 (define-key org-mode-map [(meta left)] 'paredit-backward)
 (define-key org-mode-map [(meta right)] 'paredit-forward)
