@@ -266,7 +266,16 @@ Example (-!- is the point):
 ;; its slow for js2-mode
 (setq company-idle-delay 1.5)
 
+;; Reduce the number of characters before company kicks in
+(setq company-minimum-prefix-length 2)
+
+;; keychords
 (global-set-key [(control .)] 'company-complete)
+(global-set-key (kbd "TAB") 'company-indent-or-complete-common)
+
+;; nicer completion listing for staticically typed languages
+(setq company-tooltip-align-annotations t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Helm Global Mode!
 (helm-mode 1)
@@ -392,6 +401,32 @@ See URL `https://github.com/eslint/eslint'."
 ;; enforce rules for popup windows
 ;; does not work with helms built-in documentation via C-c ? or C-h m
 ;; (require 'shackle)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; rust-mode
+(require 'rust-mode)
+
+;; Load rust-mode when you open `.rs` files
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Racer (https://github.com/phildawes/racer)
+;; Rust auto completion
+(require 'racer)
+(require 'company-racer)
+
+;; Set path to racer binary
+;; (build and install by cloning the racer git reboot and using cargo build)
+(setq racer-cmd "/home/eriksoehnel/src/racer/target/release/racer")
+
+;; Set path to rust src directory
+(setq racer-rust-src-path "/home/eriksoehnel/src/rustc-1.3.0/src")
+
+;; Setting up configurations when you load rust-mode
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+
+(add-hook 'racer-mode-hook #'company-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Highlight Symbol Mode
