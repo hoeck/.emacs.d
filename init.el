@@ -55,6 +55,10 @@
 ;; move along camelCased or da-sh-ed works
 (global-subword-mode 1)
 
+;; popup configuration
+;; (setq display-buffer-reuse-frames t)
+(setq split-width-threshold 500) ;; force horiz split, useful when visiting files from projectile grep
+
 ;; Interactively Do Things
 (require 'ido)
 
