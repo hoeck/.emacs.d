@@ -52,6 +52,9 @@
 ;; yeah
 (setq-default truncate-lines t)
 
+;; move along camelCased or da-sh-ed works
+(global-subword-mode 1)
+
 ;; Interactively Do Things
 (require 'ido)
 
