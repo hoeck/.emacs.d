@@ -261,6 +261,11 @@ Example (-!- is the point):
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; company mode everywhere
 (add-hook 'after-init-hook 'global-company-mode)
+
+;; customize the time after which the company auto completion popup opens
+;; its slow for js2-mode
+(setq company-idle-delay 1.5)
+
 (global-set-key [(control .)] 'company-complete)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -288,7 +293,7 @@ Example (-!- is the point):
 ;; https://github.com/jscs-dev/node-jscs
 (require 'flycheck)
 
-(flycheck-def-config-file-var flycheck-jscs javascript-jscs ".jscs.json" :safe #'stringp)
+(flycheck-def-config-file-var flycheck-jscs javascript-jscs ".jscsrc" :safe #'stringp)
 
 (flycheck-define-checker javascript-jscs
   "A JavaScript code style checker.
@@ -299,11 +304,52 @@ See URL `https://github.com/mdevils/node-jscs'."
   :error-parser flycheck-parse-checkstyle
   :modes (js-mode js2-mode js3-mode))
 
-(defun jscs-enable () (interactive)
-       (add-to-list 'flycheck-checkers 'javascript-jscs))
+;;; custom eshint definition without source-inplace to not disturb the grunt
+;;; watch process with generating temporary files
 
-(defun jscs-disable () (interactive)
-       (setq flycheck-checkers (remove 'javascript-jscs flycheck-checkers)))
+(flycheck-define-checker javascript-eslint-custom
+  "A Javascript syntax and style checker using eslint.
+
+See URL `https://github.com/eslint/eslint'."
+  :command ("eslint" "--format=checkstyle"
+            (config-file "--config" flycheck-eslintrc)
+            source)
+  :error-parser flycheck-parse-checkstyle
+  :error-filter (lambda (errors)
+                  (mapc (lambda (err)
+                          ;; Parse error ID from the error message
+                          (setf (flycheck-error-message err)
+                                (replace-regexp-in-string
+                                 (rx " ("
+                                     (group (one-or-more (not (any ")"))))
+                                     ")" string-end)
+                                 (lambda (s)
+                                   (setf (flycheck-error-id err)
+                                         (match-string 1 s))
+                                   "")
+                                 (flycheck-error-message err))))
+                        (flycheck-sanitize-errors errors))
+                  errors)
+  :modes (js-mode js2-mode js3-mode)
+  :next-checkers ((warning . javascript-jscs)))
+
+(add-to-list 'flycheck-disabled-checkers 'javascript-eslint)
+(add-to-list 'flycheck-checkers 'javascript-eslint-custom)
+
+;; use the projects eslint if available (in node_modules)
+(defun use-eslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (eslint (and root
+                      (expand-file-name "node_modules/.bin/eslint"
+                                        root))))
+    (when (file-executable-p eslint)
+      (setq-local flycheck-javascript-eslint-executable eslint)
+      (setq-local flycheck-javascript-eslint-custom-executable eslint))))
+
+(add-hook 'flycheck-mode-hook #'use-eslint-from-node-modules)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Tern (http://ternjs.net)
@@ -340,3 +386,12 @@ See URL `https://github.com/mdevils/node-jscs'."
 ;; Shackle (https://github.com/wasamasa/shackle)
 ;; enforce rules for popup windows
 (require 'shackle)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Highlight Symbol Mode
+(require 'highlight-symbol)
+
+(global-set-key (kbd "M-n") 'highlight-symbol-next)
+(global-set-key (kbd "M-p") 'highlight-symbol-prev)
+
+(add-hook 'js-mode-hook 'highlight-symbol-mode)
+
