@@ -430,3 +430,11 @@ See URL `https://github.com/eslint/eslint'."
   (neotree-find))
 
 (define-key my-keys-minor-mode-map (kbd "C-c C-n") 'neotree-force-find)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; multiple cursors
+(require 'multiple-cursors)
+
+(global-set-key (kbd "C-c m e") 'mc/edit-lines)
+(global-set-key (kbd "C-c m d") 'mc/mark-all-dwim)
+(global-set-key (kbd "C-c m s") 'mc/mark-all-symbols-like-this)
