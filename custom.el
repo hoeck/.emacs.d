@@ -5,6 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
+ '(bm-electric-show nil)
  '(c-offsets-alist (quote ((brace-list-intro . 0))))
  '(case-fold-search t)
  '(coffee-tab-width 4)
