@@ -50,6 +50,7 @@
  '(js-expr-indent-offset 4)
  '(js2-global-externs (quote ("angular" "_")))
  '(js2-indent-switch-body t)
+ '(js2-strict-inconsistent-return-warning nil)
  '(js3-indent-level 4)
  '(list-matching-lines-default-context-lines 1)
  '(neo-cwd-line-style (quote button))
