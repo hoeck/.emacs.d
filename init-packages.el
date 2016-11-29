@@ -438,3 +438,11 @@ See URL `https://github.com/eslint/eslint'."
 (global-set-key (kbd "C-c m e") 'mc/edit-lines)
 (global-set-key (kbd "C-c m d") 'mc/mark-all-dwim)
 (global-set-key (kbd "C-c m s") 'mc/mark-all-symbols-like-this)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; scaling text like a browser *for all buffers*
+(require 'default-text-scale)
+
+(global-set-key (kbd "C-+") 'default-text-scale-increase)
+(global-set-key (kbd "C--") 'default-text-scale-decrease)
+;; (global-set-key (kbd "C-0") (lambda () (interactive) (default-text-scale-set 0))) TODO: provide a patch to https://github.com/purcell/default-text-scale/blob/master/default-text-scale.el
