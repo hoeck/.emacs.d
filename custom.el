@@ -34,7 +34,7 @@
     ("--white" "--unparam" "--todo" "--nomen" "--regexp" "--plusplus" "--bitwise" "--browser" "--nomen" "--predef" "$" "--predef" "jQuery" "--maxerror" "16")))
  '(flymake-jslint-command "jslint")
  '(flymake-jslint-detect-trailing-comma t)
- '(global-flycheck-mode t)
+ '(global-flycheck-mode nil)
  '(global-font-lock-mode t nil (font-lock))
  '(haskell-mode-hook
    (quote
