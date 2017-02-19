@@ -1,6 +1,101 @@
 ;;;
-;;; package-specific customizazions which are loaded after pacakge-initialize
+;;; package-specific customizations which are loaded after pacakge-initialize
 ;;;
+
+;;; Code:
+
+;;; but first syncronize the packages across all emacs installs
+(defun ensure-package-installed (&rest packages)
+  "Assure every package is installed, ask for installation if it’s not.
+   Return a list of installed packages or nil for every skipped package."
+  (mapcar
+   (lambda (package)
+     (unless (package-installed-p package)
+       (package-install package)))
+     packages)
+)
+
+;; make sure to have downloaded an archive description.
+;; Or use package-archive-contents as suggested by Nicolas Dudebout
+(or (file-exists-p package-user-dir)
+    (package-refresh-contents))
+
+;; package list
+(ensure-package-installed
+ 'ac-cider
+ 'ac-nrepl
+ 'ace-jump-mode
+ 'async
+ 'auto-complete
+ 'auto-highlight-symbol
+ 'autopair
+ 'bm
+ 'browse-kill-ring
+ 'buffer-move
+ 'cider
+ 'clojure-mode
+ 'clojurescript-mode
+ 'coffee-mode
+ 'color-theme
+ 'color-theme-railscasts
+ 'company
+ 'company-racer
+ 'csharp-mode
+ 'dash
+ 'default-text-scale
+ 'deferred
+ 'egg
+ 'epl
+ 'f
+ 'flycheck
+ 'flycheck-rust
+ 'flymake-easy
+ 'flymake-python-pyflakes
+ 'git-commit
+ 'go-mode
+ 'haskell-mode
+ 'helm
+ 'helm-core
+ 'helm-dash
+ 'helm-projectile
+ 'highlight-symbol
+ 'idle-highlight
+ 'js2-mode
+ 'js3-mode
+ 'let-alist
+ 'magit
+ 'magit-popup
+ 'markdown-mode
+ 'markdown-mode+
+ 'minimap
+ 'multiple-cursors
+ 'neotree
+ 'nyan-mode
+ 'php-mode
+ 'pkg-info
+ 'popup
+ 'projectile
+ 'queue
+ 'racer
+ 'rust-mode
+ 's
+ 'scala-mode2
+ 'scss-mode
+ 'seq
+ 'shackle
+ 'smartparens
+ 'spinner
+ 'sql-indent
+ 'sr-speedbar
+ 'tabbar
+ 'tagedit
+ 'tide
+ 'typescript-mode
+ 'vimish-fold
+ 'web-mode
+ 'with-editor
+ 'yaml-mode
+ 'yasnippet)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; visual bookmark mode
