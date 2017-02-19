@@ -53,53 +53,6 @@
    (let ((comint-buffer-maximum-size 0))
      (comint-truncate-buffer)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; paredit
-(require 'paredit)
-(require 'paredit-everywhere)
-;; (require 'paredit)
-;; (define-key paredit-mode-map "\C-j" nil) ;; use C-j for lisp-eval-print
-;; (define-key paredit-mode-map ";" nil) ;; i want normal comments or a `comment-next-expr' function
-;; (define-key paredit-mode-map ")" 'paredit-close-parenthesis)
-;; (define-key paredit-mode-map [(meta right)] 'paredit-forward)
-;; (define-key paredit-mode-map [(meta left)] 'paredit-backward)
-
-;; can't live without
-(global-set-key [(meta left)] 'paredit-backward)
-(global-set-key [(meta right)] 'paredit-forward)
-
-;; (eval-after-load 'paredit
-;;
-;;   '(progn
-;;      ;; do not treat strings as s-expressions when beeing inside them and trying to escape!
-;;      (defun paredit-at-string-start ()
-;;        (if (paredit-in-string-p)
-;;            (eql (+ 1 (first (paredit-string-start+end-points))) (point))))
-;;
-;;      (defun paredit-at-string-end ()
-;;        (if (paredit-in-string-p)
-;;            (eql (cdr (paredit-string-start+end-points)) (point))))
-;;
-;;      (defun-saving-mark paredit-backward ()
-;;        "like paredit-backward with different in-string movement.
-;; When at the start of a string, do not move to the
-;; end of the string before - just skip the string delim char."
-;;        (paredit-handle-sexp-errors
-;;            (if (paredit-at-string-start)
-;;                (backward-char)
-;;              (backward-sexp))
-;;          (if (paredit-in-string-p) (backward-char) (backward-up-list))))
-;;
-;;      (defun-saving-mark paredit-forward ()
-;;        "like paredit-forward with different in-string movement.
-;; When at the end of a string, do not move to the
-;; start of the next string - just skip the string delim char."
-;;        (paredit-handle-sexp-errors
-;;            (if (paredit-at-string-end)
-;;                (forward-char)
-;;              (forward-sexp))
-;;          (if (paredit-in-string-p) (forward-char) (up-list))))))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; org-mode
 (require 'org) ;; for org-mode-map
@@ -109,9 +62,6 @@
 
 ;; files to search through for agenda view
 (setq org-agenda-files (list "~/org"))
-
-(define-key org-mode-map [(meta left)] 'paredit-backward)
-(define-key org-mode-map [(meta right)] 'paredit-forward)
 
 ;;; org remember (capture), see: http://orgmode.org/manual/Capture.html#Capture
 (setq org-default-notes-file "~/org/notes.org")
@@ -165,9 +115,6 @@
 
 (define-key py-mode-map (read-kbd-macro "TAB") 'py-indent-line)
 
-;; (require 'paredit) ;; for paren navigation
-(define-key py-mode-map [(meta left)] 'paredit-backward)
-(define-key py-mode-map [(meta right)] 'paredit-forward)
 (define-key py-mode-map [(meta n)] 'py-next-statement)
 (define-key py-mode-map [(meta down)] 'py-next-statement)
 (define-key py-mode-map [(meta p)] 'py-previous-statement)
@@ -447,3 +394,8 @@ See URL `https://github.com/eslint/eslint'."
 (global-set-key (kbd "C-+") 'default-text-scale-increase)
 (global-set-key (kbd "C--") 'default-text-scale-decrease)
 ;; (global-set-key (kbd "C-0") (lambda () (interactive) (default-text-scale-set 0))) TODO: provide a patch to https://github.com/purcell/default-text-scale/blob/master/default-text-scale.el
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; smartparens
+(require 'smartparens-config)
+(add-hook 'js-mode-hook #'smartparens-mode)

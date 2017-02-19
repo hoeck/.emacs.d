@@ -90,7 +90,6 @@
  '(show-paren-mode t nil (paren))
  '(show-paren-style (quote expression))
  '(size-indication-mode nil)
- '(smartparens-global-mode nil)
  '(sp-base-key-bindings (quote paredit))
  '(sql-pop-to-buffer-after-send-region nil)
  '(sql-product (quote mysql))
@@ -103,6 +102,7 @@
  '(tail-raise nil)
  '(tail-volatile nil)
  '(term-scroll-to-bottom-on-output t)
+ '(tide-tsserver-executable "node_modules/.bin/tsserver")
  '(tramp-auto-save-directory "~/.emacs.d/tramp_backups"))
 
 (custom-set-faces
