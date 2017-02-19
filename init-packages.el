@@ -34,10 +34,10 @@
  'buffer-move
  'cider
  'clojure-mode
- 'clojurescript-mode
+ ;; 'clojurescript-mode
  'coffee-mode
  'color-theme
- 'color-theme-railscasts
+ ;; 'color-theme-railscasts
  'company
  'company-racer
  'csharp-mode
@@ -59,7 +59,7 @@
  'helm-dash
  'helm-projectile
  'highlight-symbol
- 'idle-highlight
+ ;; 'idle-highlight
  'js2-mode
  'js3-mode
  'let-alist
@@ -67,7 +67,7 @@
  'magit-popup
  'markdown-mode
  'markdown-mode+
- 'minimap
+ ;; 'minimap
  'multiple-cursors
  'neotree
  'nyan-mode
@@ -79,7 +79,7 @@
  'racer
  'rust-mode
  's
- 'scala-mode2
+ ;; 'scala-mode2
  'scss-mode
  'seq
  'shackle
