@@ -494,3 +494,23 @@ See URL `https://github.com/eslint/eslint'."
 ;;; smartparens
 (require 'smartparens-config)
 (add-hook 'js-mode-hook #'smartparens-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; tide (typescript ide) mode
+
+;; aligns annotation to the right hand side
+(setq company-tooltip-align-annotations t)
+
+;; formats the buffer before saving
+;; (add-hook 'before-save-hook 'tide-format-before-save) ;; disabled for now
+
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (company-mode +1))
+
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
