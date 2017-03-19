@@ -16,6 +16,7 @@
  '(company-require-match nil)
  '(current-language-environment "UTF-8")
  '(default-input-method "rfc1345")
+ '(default-text-scale-amount 20)
  '(display-battery-mode t)
  '(espresso-expr-indent-offset 4)
  '(espresso-indent-level 4)
