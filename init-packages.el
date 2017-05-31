@@ -480,7 +480,6 @@ See URL `https://github.com/eslint/eslint'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; smartparens
 (require 'smartparens-config)
-(add-hook 'js-mode-hook #'smartparens-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; tide (typescript ide) mode
