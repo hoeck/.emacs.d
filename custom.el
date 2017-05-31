@@ -8,7 +8,7 @@
  '(bm-electric-show nil)
  '(c-offsets-alist (quote ((brace-list-intro . 0))))
  '(case-fold-search t)
- '(coffee-tab-width 4)
+ '(coffee-tab-width 2)
  '(column-number-mode t)
  '(comint-history-isearch (quote dwim))
  '(comint-input-ring-file-name nil)
@@ -21,11 +21,13 @@
  '(espresso-expr-indent-offset 4)
  '(espresso-indent-level 4)
  '(ethan-wspace-errors (quote (many-nls-eof no-nl-eof eol)))
+ '(explicit-shell-file-name nil)
  '(fill-column 78)
  '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
  '(flycheck-checkers
    (quote
     (ada-gnat asciidoc c/c++-clang c/c++-gcc c/c++-cppcheck cfengine chef-foodcritic coffee coffee-coffeelint coq css-csslint d-dmd emacs-lisp emacs-lisp-checkdoc erlang eruby-erubis fortran-gfortran go-gofmt go-golint go-vet go-build go-test go-errcheck groovy haml handlebars haskell-stack-ghc haskell-ghc haskell-hlint html-tidy jade javascript-jshint javascript-eslint javascript-gjslint javascript-jscs javascript-standard json-jsonlint json-python-json less luacheck lua perl perl-perlcritic php php-phpmd php-phpcs puppet-parser puppet-lint python-flake8 python-pylint python-pycompile r-lintr racket rpm-rpmlint rst-sphinx rst ruby-rubocop ruby-rubylint ruby ruby-jruby rust sass scala scala-scalastyle scss-lint scss sh-bash sh-posix-dash sh-posix-bash sh-zsh sh-shellcheck slim sql-sqlint tex-chktex tex-lacheck texinfo verilog-verilator xml-xmlstarlet xml-xmllint yaml-jsyaml yaml-ruby)))
+ '(flycheck-coffee-coffeelint-executable "/home/erik/heavygoods/node_modules/.bin/coffeelint")
  '(flycheck-disabled-checkers (quote (javascript-jshint javascript-jscs)))
  '(flycheck-eslintrc ".eslintrc")
  '(flycheck-jscs ".jscsrc")
