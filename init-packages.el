@@ -374,6 +374,50 @@ See URL `https://github.com/eslint/eslint'."
 
 (add-hook 'flycheck-mode-hook #'use-eslint-from-node-modules)
 
+;; custom ts checker with --project param and local (node_modules/.bin) tslint and without explict tslist.json
+(flycheck-def-config-file-var flycheck-typescript-tslint-custom-tsconfig typescript-tslint "tsconfig.json"
+  :safe #'stringp)
+
+(flycheck-define-checker typescript-tslint-custom
+  "A Typescript syntax and style checker using eslint.
+
+See URL `https://github.com/eslint/eslint'."
+  :command ("tslint"
+            "--format" "checkstyle"
+            (config-file "--project" flycheck-typescript-tslint-custom-tsconfig)
+            source)
+  :error-parser flycheck-parse-checkstyle
+  :error-filter (lambda (errors)
+                  (mapc (lambda (err)
+                          ;; Parse error ID from the error message
+                          (setf (flycheck-error-message err)
+                                (replace-regexp-in-string
+                                 (rx " ("
+                                     (group (one-or-more (not (any ")"))))
+                                     ")" string-end)
+                                 (lambda (s)
+                                   (setf (flycheck-error-id err)
+                                         (match-string 1 s))
+                                   "")
+                                 (flycheck-error-message err))))
+                        (flycheck-sanitize-errors errors))
+                  errors)
+  :modes (tide-mode web-mode))
+
+(add-to-list 'flycheck-checkers 'typescript-tslint-custom)
+
+;; use the projects tslint if available (in node_modules)
+(defun use-tslint-from-node-modules ()
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (tslint (and root
+                      (expand-file-name "node_modules/.bin/tslint"
+                                        root))))
+    (when (file-executable-p tslint)
+      (setq-local flycheck-typescript-tslint-custom-executable tslint))))
+
+(add-hook 'flycheck-mode-hook #'use-tslint-from-node-modules)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Tern (http://ternjs.net)
@@ -461,6 +505,12 @@ See URL `https://github.com/eslint/eslint'."
 
 (define-key my-keys-minor-mode-map (kbd "C-c C-n") 'neotree-force-find)
 
+;; turn of tooltips in neotree, they are useless, annoying and cause rendering glitches
+(defun setup-neotree-mode ()
+  (tooltip-mode 0))
+
+(add-hook 'neotree-mode-hook #'setup-neotree-mode)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; multiple cursors
 (require 'multiple-cursors)
@@ -483,6 +533,8 @@ See URL `https://github.com/eslint/eslint'."
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; tide (typescript ide) mode
+(require 'typescript-mode)
+(require 'tide)
 
 ;; aligns annotation to the right hand side
 (setq company-tooltip-align-annotations t)
@@ -500,3 +552,31 @@ See URL `https://github.com/eslint/eslint'."
   (company-mode +1))
 
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+;; put tslint as the last one into the chain of fly-checkers, but only if
+;; compilation did produce warnings
+(flycheck-add-next-checker 'tsx-tide '(warning . typescript-tslint-custom))
+(flycheck-add-next-checker 'typescript-tide '(warning . typescript-tslint-custom))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; web-mode
+(require 'web-mode)
+
+;; js + tsx support
+(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+
+(defun custom-web-mode-typescript-hook ()
+  (when (and (equal web-mode-content-type "jsx")
+             (string-match-p "\\.tsx$" buffer-file-name))
+    (setup-tide-mode)))
+
+(add-hook 'web-mode-hook  'custom-web-mode-typescript-hook)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; sensible unique buffer names
+(require 'uniquify)
+
+(setq uniquify-buffer-name-style 'post-forward)
+(setq uniquify-after-kill-buffer-p nil)    ; rename after killing uniquified
+(setq uniquify-ignore-buffers-re "^\\*")   ; don't muck with special buffers
