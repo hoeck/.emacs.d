@@ -326,20 +326,8 @@
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Flycheck JSCS
-;; https://github.com/jscs-dev/node-jscs
+;; Flycheck
 (require 'flycheck)
-
-(flycheck-def-config-file-var flycheck-jscs javascript-jscs ".jscsrc" :safe #'stringp)
-
-(flycheck-define-checker javascript-jscs
-  "A JavaScript code style checker.
-See URL `https://github.com/mdevils/node-jscs'."
-  :command ("jscs" "--reporter" "checkstyle"
-            (config-file "--config" flycheck-jscs)
-            source)
-  :error-parser flycheck-parse-checkstyle
-  :modes (js-mode js2-mode js3-mode))
 
 ;;; custom eshint definition without source-inplace to not disturb the grunt
 ;;; watch process with generating temporary files
@@ -367,8 +355,7 @@ See URL `https://github.com/eslint/eslint'."
                                  (flycheck-error-message err))))
                         (flycheck-sanitize-errors errors))
                   errors)
-  :modes (js-mode js2-mode js3-mode)
-  :next-checkers ((warning . javascript-jscs)))
+  :modes (js-mode js2-mode js3-mode))
 
 (add-to-list 'flycheck-disabled-checkers 'javascript-eslint)
 (add-to-list 'flycheck-checkers 'javascript-eslint-custom)

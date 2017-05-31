@@ -104,7 +104,14 @@
  '(tail-volatile nil)
  '(term-scroll-to-bottom-on-output t)
  '(tide-tsserver-executable "node_modules/.bin/tsserver")
- '(tramp-auto-save-directory "~/.emacs.d/tramp_backups"))
+ '(tramp-auto-save-directory "~/.emacs.d/tramp_backups")
+ '(web-mode-code-indent-offset 4)
+ '(web-mode-enable-auto-indentation nil)
+ '(web-mode-enable-auto-opening nil)
+ '(web-mode-enable-auto-pairing nil)
+ '(web-mode-enable-auto-quoting nil)
+ '(web-mode-enable-control-block-indentation nil)
+ '(web-mode-markup-indent-offset 4))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
