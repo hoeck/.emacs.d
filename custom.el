@@ -71,6 +71,9 @@
  '(org-agenda-files (quote ("~/org/admin-journal.org" "~/org/notes.org")))
  '(org-outline-path-complete-in-steps nil)
  '(org-refile-use-outline-path t)
+ '(package-selected-packages
+   (quote
+    (yasnippet yaml-mode web-mode vimish-fold tide tagedit tabbar sr-speedbar sql-indent smartparens shackle scss-mode scala-mode2 racer php-mode nyan-mode neotree multiple-cursors minimap markdown-mode+ magit js3-mode js2-mode idle-highlight highlight-symbol helm-projectile helm-dash haskell-mode go-mode flymake-python-pyflakes flycheck-rust egg default-text-scale csharp-mode company-racer color-theme-railscasts coffee-mode clojurescript-mode buffer-move browse-kill-ring bm autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider)))
  '(projectile-enable-caching t)
  '(projectile-project-root-files
    (quote
