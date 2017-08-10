@@ -8,12 +8,15 @@
 (defun ensure-package-installed (&rest packages)
   "Assure every package is installed, ask for installation if it’s not.
    Return a list of installed packages or nil for every skipped package."
-  (mapcar
-   (lambda (package)
-     (unless (package-installed-p package)
-       (package-install package)))
-     packages)
-)
+  (let ((refresh-needed t))
+    (mapcar
+     (lambda (package)
+       (unless (package-installed-p package)
+         (unless refresh-needed
+           (package-refresh-contents)
+           (setq refresh-needed nil))
+         (package-install package)))
+     packages)))
 
 ;; make sure to have downloaded an archive description.
 ;; Or use package-archive-contents as suggested by Nicolas Dudebout
@@ -23,7 +26,6 @@
 ;; package list
 (ensure-package-installed
  'ac-cider
- 'ac-nrepl
  'ace-jump-mode
  'async
  'auto-complete
@@ -195,12 +197,6 @@
                             handler)))
 
 (define-key cider-mode-map [(control \j)] 'cider-eval-last-expression-pprint)
-
-(require 'ac-nrepl)
-(add-hook 'cider-mode-hook 'ac-nrepl-setup)
-(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
-(add-to-list 'ac-modes 'cider-mode)
-(add-to-list 'ac-modes 'cider-repl-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; python mode customs
@@ -374,19 +370,30 @@ See URL `https://github.com/eslint/eslint'."
 
 (add-hook 'flycheck-mode-hook #'use-eslint-from-node-modules)
 
-;; custom ts checker with --project param and local (node_modules/.bin) tslint and without explict tslist.json
-(flycheck-def-config-file-var flycheck-typescript-tslint-custom-tsconfig typescript-tslint "tsconfig.json"
+;; custom tslint checker (forgot why I actually did this: I was initially
+;; supporting the --project option to configure tslint via tsconfig.json but
+;; that stopped working after a typescript update so I'm now back to plain
+;; tslint.json config and it still works like I expect it)
+(flycheck-def-config-file-var flycheck-typescript-tslint-custom-tslint-json typescript-tslint "tslint.json"
   :safe #'stringp)
 
 (flycheck-define-checker typescript-tslint-custom
   "A Typescript syntax and style checker using eslint.
 
-See URL `https://github.com/eslint/eslint'."
+See URL `https://palantir.github.io/tslint/'."
   :command ("tslint"
             "--format" "checkstyle"
-            (config-file "--project" flycheck-typescript-tslint-custom-tsconfig)
+            ;; Note: --type-check does not work when linting single only files, as
+            ;; flycheck does it on save need to use a commandline task for
+            ;; that or use https://github.com/angelozerr/tslint-language-service
+            ;; (integrates tslint it into tsserver and makes flycheck-tslint obsolete)
+            (config-file "--config" flycheck-typescript-tslint-custom-tslint-json)
             source)
-  :error-parser flycheck-parse-checkstyle
+  :error-parser (lambda (output checker buffer)
+                  ;; remove everything (tslint warnings) before the opening xml tag
+                  ;; you get these warnings when using any rules that require --type-check
+                  (let ((output-without-warnings (replace-regexp-in-string "\\(.\\|\n\\)*<?xml version=\"" "<?xml version=\"" output)))
+                    (flycheck-parse-checkstyle output-without-warnings checker buffer)))
   :error-filter (lambda (errors)
                   (mapc (lambda (err)
                           ;; Parse error ID from the error message
@@ -402,7 +409,7 @@ See URL `https://github.com/eslint/eslint'."
                                  (flycheck-error-message err))))
                         (flycheck-sanitize-errors errors))
                   errors)
-  :modes (tide-mode web-mode))
+  :modes (tide-mode typescript-mode web-mode))
 
 (add-to-list 'flycheck-checkers 'typescript-tslint-custom)
 
@@ -422,15 +429,15 @@ See URL `https://github.com/eslint/eslint'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Tern (http://ternjs.net)
 
-(add-to-list 'load-path "~/src/tern/emacs/")
-(autoload 'tern-mode "tern.el" nil t)
+;; (add-to-list 'load-path "~/src/tern/emacs/")
+;; (autoload 'tern-mode "tern.el" nil t)
 
-(eval-after-load 'tern
-   '(progn
-      (require 'tern-auto-complete)
-      (tern-ac-setup)))
-
-(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
+;; (eval-after-load 'tern
+;;    '(progn
+;;       (require 'tern-auto-complete)
+;;       (tern-ac-setup)))
+;;
+;; (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 
 ;; The Emacs mode uses the bin/tern server, and project configuration is done
 ;; with a .tern-project file.
@@ -554,7 +561,7 @@ See URL `https://github.com/eslint/eslint'."
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 
 ;; put tslint as the last one into the chain of fly-checkers, but only if
-;; compilation did produce warnings
+;; compilation did not produce any warnings
 (flycheck-add-next-checker 'tsx-tide '(warning . typescript-tslint-custom))
 (flycheck-add-next-checker 'typescript-tide '(warning . typescript-tslint-custom))
 

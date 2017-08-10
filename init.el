@@ -214,11 +214,12 @@
 (when (not slim-init)
     ;; fat startup
     (require 'package)
-    (setq package-archives '(;; ("gnu" . "http://elpa.gnu.org/packages/")
-                             ;; ("marmalade" . "http://marmalade-repo.org/packages/")
+    (setq package-archives '(;; ("marmalade" . "http://marmalade-repo.org/packages/")
                              ;; ATM, install everything from melpa only as it seems
                              ;; to be the most complete and up-to-date
-                             ("melpa" . "http://melpa.org/packages/")))
+                             ("melpa" . "https://melpa.org/packages/")
+                             ;; melpa requires GNU melpa
+                             ("gnu" . "https://elpa.gnu.org/packages/")))
 
     ;; manually control package loading (at the end of this file)
     (setq package-enable-at-startup nil)
