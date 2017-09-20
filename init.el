@@ -210,6 +210,11 @@
 (define-key my-keys-minor-mode-map (kbd "C-c C-v") 'revert-buffer-no-confirm)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; don't ask when reverting buffers
+;; I'm using git anyways
+(setq revert-without-query '(".*"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mitigate Bug#28350 (security) in Emacs 25.2 and earlier.
 ;; http://seclists.org/oss-sec/2017/q3/422
 (eval-after-load "enriched"
