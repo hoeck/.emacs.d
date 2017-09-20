@@ -95,6 +95,8 @@
  'typescript-mode
  'vimish-fold
  'web-mode
+ 'wgrep
+ 'wgrep-helm
  'with-editor
  'yaml-mode
  'yasnippet)
@@ -587,3 +589,8 @@ See URL `https://palantir.github.io/tslint/'."
 (setq uniquify-buffer-name-style 'post-forward)
 (setq uniquify-after-kill-buffer-p nil)    ; rename after killing uniquified
 (setq uniquify-ignore-buffers-re "^\\*")   ; don't muck with special buffers
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; editable grep buffers
+(require 'wgrep)
+(require 'wgrep-helm)
