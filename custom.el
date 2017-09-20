@@ -14,6 +14,7 @@
  '(comint-input-ring-file-name nil)
  '(comment-empty-lines t)
  '(company-require-match nil)
+ '(css-indent-offset 2)
  '(current-language-environment "UTF-8")
  '(default-input-method "rfc1345")
  '(default-text-scale-amount 20)
@@ -47,7 +48,7 @@
  '(helm-move-to-line-cycle-in-source t)
  '(highlight-symbol-idle-delay 0.3)
  '(ido-default-buffer-method (quote selected-window))
- '(ido-everywhere t)
+ '(ido-everywhere nil)
  '(ido-mode (quote both) nil (ido))
  '(ipython-command "ipython")
  '(js-auto-indent-flag nil)
@@ -57,6 +58,10 @@
  '(js2-strict-inconsistent-return-warning nil)
  '(js3-indent-level 4)
  '(list-matching-lines-default-context-lines 1)
+ '(neo-confirm-change-root (quote off-p))
+ '(neo-confirm-create-directory (quote off-p))
+ '(neo-confirm-create-file (quote off-p))
+ '(neo-confirm-kill-buffers-for-files-in-directory (quote off-p))
  '(neo-cwd-line-style (quote button))
  '(neo-dont-be-alone t)
  '(neo-keymap-style (quote concise))
@@ -73,7 +78,7 @@
  '(org-refile-use-outline-path t)
  '(package-selected-packages
    (quote
-    (markdown-mode helm git-commit flymake-easy flycheck f company color-theme haml-mode yasnippet yaml-mode web-mode vimish-fold tide tagedit tabbar sr-speedbar sql-indent smartparens shackle scss-mode scala-mode2 racer php-mode nyan-mode neotree multiple-cursors minimap markdown-mode+ magit js3-mode js2-mode idle-highlight highlight-symbol helm-projectile helm-dash haskell-mode go-mode flymake-python-pyflakes flycheck-rust egg default-text-scale csharp-mode company-racer color-theme-railscasts coffee-mode clojurescript-mode buffer-move browse-kill-ring bm autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider)))
+    (wgrep wgrep-helm markdown-mode helm git-commit flymake-easy flycheck f company color-theme haml-mode yasnippet yaml-mode web-mode vimish-fold tide tagedit tabbar sr-speedbar sql-indent smartparens shackle scss-mode scala-mode2 racer php-mode nyan-mode neotree multiple-cursors minimap markdown-mode+ magit js3-mode js2-mode idle-highlight highlight-symbol helm-projectile helm-dash haskell-mode go-mode flymake-python-pyflakes flycheck-rust egg default-text-scale csharp-mode company-racer color-theme-railscasts coffee-mode clojurescript-mode buffer-move browse-kill-ring bm autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider)))
  '(projectile-enable-caching t)
  '(projectile-project-root-files
    (quote
@@ -89,6 +94,8 @@
     ("-i" "-colors" "LightBG" "-nobanner" "-noconfirm_exit")))
  '(py-shell-switch-buffers-on-execute nil)
  '(python-python-command "ipython")
+ '(ruby-insert-encoding-magic-comment nil)
+ '(ruby-use-encoding-map t)
  '(scroll-bar-mode (quote right))
  '(scss-compile-at-save nil)
  '(sgml-basic-offset 4)
@@ -111,6 +118,7 @@
  '(tide-tsserver-executable "node_modules/.bin/tsserver")
  '(tramp-auto-save-directory "~/.emacs.d/tramp_backups")
  '(web-mode-code-indent-offset 4)
+ '(web-mode-css-indent-offset 2)
  '(web-mode-enable-auto-indentation nil)
  '(web-mode-enable-auto-opening nil)
  '(web-mode-enable-auto-pairing nil)
