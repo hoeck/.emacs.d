@@ -65,6 +65,7 @@
  '(neo-cwd-line-style (quote button))
  '(neo-dont-be-alone t)
  '(neo-keymap-style (quote concise))
+ '(neo-show-hidden-files t)
  '(neo-smart-open t)
  '(neo-theme (quote arrow))
  '(neo-window-width 35)
