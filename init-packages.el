@@ -27,6 +27,7 @@
 (ensure-package-installed
  'ac-cider
  'ace-jump-mode
+ 'all-the-icons
  'async
  'auto-complete
  'auto-highlight-symbol
@@ -594,3 +595,10 @@ See URL `https://palantir.github.io/tslint/'."
 ;;; editable grep buffers
 (require 'wgrep)
 (require 'wgrep-helm)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; icon fonts
+;;;
+;;; (for the neotree icon theme)
+;;; do not forget to run "M-x all-the-icons-install-fonts"
+(require 'all-the-icons)
