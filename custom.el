@@ -6,6 +6,13 @@
  '(auto-save-file-name-transforms (quote ((".*" "~/.emacs.d/autosaves/\\1" t))))
  '(backup-directory-alist (quote ((".*" . "~/.emacs.d/backups/"))))
  '(bm-electric-show nil)
+ '(c-default-style
+   (quote
+    ((c-mode . "cc-mode")
+     (c++-mode . "cc-mode")
+     (java-mode . "java")
+     (awk-mode . "awk")
+     (other . "gnu"))))
  '(c-offsets-alist (quote ((brace-list-intro . 0))))
  '(case-fold-search t)
  '(coffee-tab-width 2)
@@ -44,6 +51,7 @@
    (quote
     (capitalized-words-mode turn-on-haskell-decl-scan turn-on-haskell-doc turn-on-haskell-indent)))
  '(helm-buffer-details-flag nil)
+ '(helm-candidate-number-limit 500)
  '(helm-mm-matching-method (quote multi2))
  '(helm-move-to-line-cycle-in-source t)
  '(highlight-symbol-idle-delay 0.3)
@@ -56,6 +64,8 @@
  '(js2-global-externs (quote ("angular" "_")))
  '(js2-indent-switch-body t)
  '(js2-strict-inconsistent-return-warning nil)
+ '(js2-strict-missing-semi-warning nil)
+ '(js2-strict-trailing-comma-warning nil)
  '(js3-indent-level 4)
  '(list-matching-lines-default-context-lines 1)
  '(neo-confirm-change-root (quote off-p))
@@ -79,7 +89,9 @@
  '(org-refile-use-outline-path t)
  '(package-selected-packages
    (quote
-    (all-the-icons wgrep wgrep-helm markdown-mode helm git-commit flymake-easy flycheck f company color-theme haml-mode yasnippet yaml-mode web-mode vimish-fold tide tagedit tabbar sr-speedbar sql-indent smartparens shackle scss-mode scala-mode2 racer php-mode nyan-mode neotree multiple-cursors minimap markdown-mode+ magit js3-mode js2-mode idle-highlight highlight-symbol helm-projectile helm-dash haskell-mode go-mode flymake-python-pyflakes flycheck-rust egg default-text-scale csharp-mode company-racer color-theme-railscasts coffee-mode clojurescript-mode buffer-move browse-kill-ring bm autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider)))
+    (unicode-fonts dockerfile-mode typescript-mode json-mode nvm iter2 elixir-mode all-the-icons markdown-mode helm git-commit flymake-easy flycheck f company color-theme haml-mode yasnippet yaml-mode tagedit tabbar sr-speedbar sql-indent shackle scss-mode scala-mode2 php-mode nyan-mode neotree multiple-cursors minimap markdown-mode+ magit js3-mode js2-mode idle-highlight highlight-symbol helm-projectile helm-dash haskell-mode go-mode flymake-python-pyflakes flycheck-rust egg default-text-scale csharp-mode company-racer color-theme-railscasts coffee-mode clojurescript-mode buffer-move browse-kill-ring bm autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider)))
+ '(prettier-js-command "prettier")
+ '(prettier-mode-sync-config-flag nil)
  '(projectile-enable-caching t)
  '(projectile-project-root-files
    (quote
@@ -117,7 +129,8 @@
  '(tail-volatile nil)
  '(term-scroll-to-bottom-on-output t)
  '(tide-tsserver-executable "node_modules/.bin/tsserver")
- '(tramp-auto-save-directory "~/.emacs.d/tramp_backups")
+ '(tramp-auto-save-directory "~/.emacs.d/tramp_backups" nil (tramp))
+ '(typescript-indent-level 4)
  '(web-mode-code-indent-offset 4)
  '(web-mode-css-indent-offset 2)
  '(web-mode-enable-auto-indentation nil)
@@ -132,7 +145,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "RGB:FFFF/EAF6/CB8B" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 105 :width normal :foundry "bitstream" :family "Bitstream Vera Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "RGB:FFFF/EAF6/CB8B" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 95 :width normal :family "Source Code Pro"))))
  '(bm-face ((t (:background "burlywood1" :box (:line-width 1 :color "dark orange") :slant normal))))
  '(diff-added ((t (:inherit diff-changed :foreground "darkgreen"))))
  '(diff-changed ((nil (:foreground "red"))))

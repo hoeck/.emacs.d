@@ -47,6 +47,7 @@
  'dash
  'default-text-scale
  'deferred
+ 'dockerfile-mode
  'egg
  'epl
  'f
@@ -65,6 +66,7 @@
  ;; 'idle-highlight
  'js2-mode
  'js3-mode
+ 'json-mode
  'let-alist
  'magit
  'magit-popup
@@ -308,6 +310,7 @@
 ;; https://github.com/bbatsov/projectile
 (projectile-global-mode)
 (setq projectile-switch-project-action 'helm-projectile)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Ace Jump
@@ -515,8 +518,11 @@ See URL `https://palantir.github.io/tslint/'."
 
 (define-key my-keys-minor-mode-map (kbd "C-c C-n") 'neotree-force-find)
 
-;; turn of tooltips in neotree, they are useless, annoying and cause rendering glitches
 (defun setup-neotree-mode ()
+  ;; disable my conflicting keymaps inside neotree
+  (my-keys-minor-mode 0)
+  ;; turn of tooltips in neotree, they are useless, annoying and cause
+  ;; rendering glitches
   (tooltip-mode 0))
 
 (add-hook 'neotree-mode-hook #'setup-neotree-mode)
@@ -542,6 +548,13 @@ See URL `https://palantir.github.io/tslint/'."
 (require 'smartparens-config)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; prettier integration
+;;;
+;;(add-to-list 'load-path "~/.emacs.d/extern/prettier.el")
+(load "~/.emacs.d/extern/prettier.el/prettier.el")
+;; enable globally with: (add-hook 'after-init-hook #'global-prettier-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; tide (typescript ide) mode
 (require 'typescript-mode)
 (require 'tide)
@@ -556,6 +569,7 @@ See URL `https://palantir.github.io/tslint/'."
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
+  (prettier-mode +1)
   (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
@@ -602,3 +616,30 @@ See URL `https://palantir.github.io/tslint/'."
 ;;; (for the neotree icon theme)
 ;;; do not forget to run "M-x all-the-icons-install-fonts"
 (require 'all-the-icons)
+
+;; add missing typescript tsx icon
+(add-to-list 'all-the-icons-icon-alist
+             '("\\.tsx$"
+               all-the-icons-alltheicon "react"
+               :height 1.0
+               :face all-the-icons-blue))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; json-mode
+(require 'json-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; mode for editing Dockerfiles
+(require 'dockerfile-mode)
+
+(defun setup-json-mode-hook ()
+  ;; js2-basic-offset is 4 for all my js stuff but json is mostly
+  ;; package.json, tsconfig.json which always uses 2-space indentation
+  (setq-local js-indent-level 2))
+
+(add-hook 'json-mode-hook  'setup-json-mode-hook)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; better unicode font configuration (so i can see unicode symbols)
+(require 'unicode-fonts)
+(unicode-fonts-setup)

@@ -1,3 +1,4 @@
+%backup%~
 .mc-lists.el
 /auto-save-list
 /autosaves
@@ -8,6 +9,7 @@
 /eshell
 /tramp
 /url/cookies
+/var
 /yasnippet
 ido.last
 projectile-bookmarks.eld

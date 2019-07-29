@@ -21,6 +21,9 @@
 ;;; huge killring
 (setq-default kill-ring-max 500)
 
+;;; turn off terminal bell when aborting or scrolling to the end of a file
+(setq ring-bell-function 'ignore)
+
 ;;; allow copy and paste with other applications
 (setq x-select-enable-clipboard t)
 
