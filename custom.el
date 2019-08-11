@@ -89,7 +89,7 @@
  '(org-refile-use-outline-path t)
  '(package-selected-packages
    (quote
-    (unicode-fonts dockerfile-mode typescript-mode json-mode nvm iter2 elixir-mode all-the-icons markdown-mode helm git-commit flymake-easy flycheck f company color-theme haml-mode yasnippet yaml-mode tagedit tabbar sr-speedbar sql-indent shackle scss-mode scala-mode2 php-mode nyan-mode neotree multiple-cursors minimap markdown-mode+ magit js3-mode js2-mode idle-highlight highlight-symbol helm-projectile helm-dash haskell-mode go-mode flymake-python-pyflakes flycheck-rust egg default-text-scale csharp-mode company-racer color-theme-railscasts coffee-mode clojurescript-mode buffer-move browse-kill-ring bm autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider)))
+    (spinner unicode-fonts dockerfile-mode typescript-mode json-mode nvm iter2 elixir-mode all-the-icons markdown-mode helm git-commit flymake-easy flycheck f company color-theme haml-mode yasnippet yaml-mode tagedit tabbar sr-speedbar sql-indent shackle scss-mode scala-mode2 php-mode nyan-mode neotree multiple-cursors minimap markdown-mode+ magit js3-mode js2-mode idle-highlight highlight-symbol helm-projectile helm-dash haskell-mode go-mode flymake-python-pyflakes flycheck-rust egg default-text-scale csharp-mode company-racer color-theme-railscasts coffee-mode clojurescript-mode buffer-move browse-kill-ring bm autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider)))
  '(prettier-js-command "prettier")
  '(prettier-mode-sync-config-flag nil)
  '(projectile-enable-caching t)
@@ -129,7 +129,7 @@
  '(tail-volatile nil)
  '(term-scroll-to-bottom-on-output t)
  '(tide-tsserver-executable "node_modules/.bin/tsserver")
- '(tramp-auto-save-directory "~/.emacs.d/tramp_backups" nil (tramp))
+ '(tramp-auto-save-directory "~/.emacs.d/tramp_backups")
  '(typescript-indent-level 4)
  '(web-mode-code-indent-offset 4)
  '(web-mode-css-indent-offset 2)

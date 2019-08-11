@@ -4,6 +4,10 @@
 
 ;;; Code:
 
+;; fix emacs-bug which prevents using elpa:
+;; https://www.reddit.com/r/emacs/comments/cdei4p/failed_to_download_gnu_archive_bad_request/
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 ;;; but first syncronize the packages across all emacs installs
 (defun ensure-package-installed (&rest packages)
   "Assure every package is installed, ask for installation if it’s not.
@@ -25,7 +29,6 @@
 
 ;; package list
 (ensure-package-installed
- 'ac-cider
  'ace-jump-mode
  'all-the-icons
  'async
@@ -35,7 +38,6 @@
  'bm
  'browse-kill-ring
  'buffer-move
- 'cider
  'clojure-mode
  ;; 'clojurescript-mode
  'coffee-mode
@@ -64,6 +66,7 @@
  'helm-projectile
  'highlight-symbol
  ;; 'idle-highlight
+ 'iter2 ;; required by prettier.el
  'js2-mode
  'js3-mode
  'json-mode
@@ -74,13 +77,14 @@
  'markdown-mode+
  ;; 'minimap
  'multiple-cursors
+ 'nvm ;; required by prettier.el
  'neotree
  'nyan-mode
  'php-mode
  'pkg-info
  'popup
  'projectile
- 'queue
+ ;; 'queue -- obsolete?
  'racer
  'rust-mode
  's
@@ -96,6 +100,7 @@
  'tagedit
  'tide
  'typescript-mode
+ 'unicode-fonts
  'vimish-fold
  'web-mode
  'wgrep
@@ -178,30 +183,6 @@
          "* %U %? :martinsried:\n"
          :clock-in t
          )))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; clojure
-(require 'cider)
-
-(defun cider-eval-last-expression-pprint ()
-  (interactive)
-  (let* ((buffer (current-buffer))
-          (handler (nrepl-make-response-handler buffer
-                                                (lambda (buffer str)
-                                                  (with-current-buffer buffer
-                                                    (insert (format ";;> %s\n" str))))
-                                                (lambda (buffer str)
-                                                  (with-current-buffer buffer
-                                                    (dolist (x (butlast (split-string str "\n")))
-                                                      (insert (format ";;> %s\n" x)))))
-                                                (lambda (buffer str)
-                                                  (nrepl-emit-into-popup-buffer buffer str))
-                                                '())))
-    (insert "\n")
-    (cider-interactive-eval (format "((if *clojure-version* clojure.pprint/pprint identity) %s)" (cider-last-sexp))
-                            handler)))
-
-(define-key cider-mode-map [(control \j)] 'cider-eval-last-expression-pprint)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; python mode customs
