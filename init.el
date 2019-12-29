@@ -24,6 +24,16 @@
 ;;; turn off terminal bell when aborting or scrolling to the end of a file
 (setq ring-bell-function 'ignore)
 
+;; scroll settings
+;; scroll by 1 single line and try to not mess with the cursor too much
+(setq
+ mouse-wheel-scroll-amount '(1 ((shift) . 1) ((control) . nil))
+ redisplay-dont-pause t
+ scroll-margin 1
+ scroll-step 1
+ scroll-conservatively 10000 ;; do not center when moving cursor off the screen
+ scroll-preserve-screen-position t)
+
 ;;; allow copy and paste with other applications
 (setq x-select-enable-clipboard t)
 
