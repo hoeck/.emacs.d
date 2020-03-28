@@ -64,6 +64,7 @@
  'helm-core
  'helm-dash
  'helm-projectile
+ 'helm-swoop
  'highlight-symbol
  ;; 'idle-highlight
  'iter2 ;; required by prettier.el
