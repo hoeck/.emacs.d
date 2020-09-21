@@ -118,7 +118,13 @@
  '(tail-raise nil)
  '(tail-volatile nil)
  '(term-scroll-to-bottom-on-output t)
+ '(tide-completion-detailed t)
+ '(tide-completion-enable-autoimport-suggestions nil)
+ '(tide-disable-suggestions t)
+ '(tide-native-json-parsing t)
  '(tide-tsserver-executable "node_modules/.bin/tsserver")
+ '(tide-user-preferences
+   '(:includeCompletionsForModuleExports nil :includeCompletionsWithInsertText t :allowTextChangesInNewFiles t))
  '(tramp-auto-save-directory "~/.emacs.d/tramp_backups")
  '(typescript-indent-level 4)
  '(web-mode-code-indent-offset 4)
