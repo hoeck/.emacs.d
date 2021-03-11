@@ -583,9 +583,16 @@ See URL `https://palantir.github.io/tslint/'."
 ;;; sensible unique buffer names
 (require 'uniquify)
 
-(setq uniquify-buffer-name-style 'post-forward)
-(setq uniquify-after-kill-buffer-p nil)    ; rename after killing uniquified
-(setq uniquify-ignore-buffers-re "^\\*")   ; don't muck with special buffers
+;; use the full project path for project-files so they are readily find-able
+;; via helm
+;; credits to https://emacs.stackexchange.com/questions/38759/projectile-buffer-names-with-project-relative-filenames
+(defun custom-projectile-relative-buffer-name ()
+  (let ((root-dir (projectile-project-root)))
+    (when root-dir
+      (rename-buffer
+       (file-relative-name buffer-file-name root-dir)))))
+
+(add-hook 'find-file-hook #'custom-projectile-relative-buffer-name)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; editable grep buffers

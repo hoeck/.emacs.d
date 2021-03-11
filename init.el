@@ -255,9 +255,8 @@
     (load "~/.emacs.d/init-packages.el" t t)
 
     ;; org files are required for my normal workspace
-    (find-file "~/org/notes.org")
     (find-file "~/org/current.org")
-    (switch-to-buffer "notes.org"))
+    (find-file "~/org/notes.org"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; emacs strange/old custom options
