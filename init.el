@@ -222,6 +222,16 @@
 
 (define-key my-keys-minor-mode-map (kbd "C-c C-v") 'revert-buffer-no-confirm)
 
+;; useful to sync all buffers after heavy git work
+(defun revert-all-buffers ()
+  "Revert all modified buffers without confirmation"
+  (interactive)
+  (dolist (buf (buffer-list))
+    (with-current-buffer buf
+      (when buffer-file-name
+        (with-demoted-errors (format "Error while reverting buffer %s: %%s" buffer-file-name)
+          (revert-buffer t t))))))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; don't ask when reverting buffers
 ;; I'm using git anyways
