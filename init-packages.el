@@ -186,23 +186,6 @@
          )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; python mode customs
-(require 'python-mode)
-
-(add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
-
-(define-key py-mode-map (read-kbd-macro "TAB") 'py-indent-line)
-
-(define-key py-mode-map [(meta n)] 'py-next-statement)
-(define-key py-mode-map [(meta down)] 'py-next-statement)
-(define-key py-mode-map [(meta p)] 'py-previous-statement)
-(define-key py-mode-map [(meta up)] 'py-previous-statement)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; ipython via py-shell
-;;(require 'ipython)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; YaSnippet
 (require 'yasnippet)
 ;; Develop and keep personal snippets under ~/emacs.d/mysnippets
@@ -632,3 +615,18 @@ See URL `https://palantir.github.io/tslint/'."
 ;;; better unicode font configuration (so i can see unicode symbols)
 (require 'unicode-fonts)
 (unicode-fonts-setup)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; modeline customs
+(setq-default mode-line-format
+      (list
+       "%5l " ;; line numbers
+       mode-line-buffer-identification ;; filename
+       " "
+       '(:eval (list (nyan-create))) ;; rainbow scrollbar
+       " "
+       vc-mode ;; git
+       " "
+       mode-line-modes
+       mode-line-end-spaces
+       mode-line-position))
