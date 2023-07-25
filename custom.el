@@ -123,6 +123,7 @@
  '(tide-completion-enable-autoimport-suggestions nil)
  '(tide-disable-suggestions t)
  '(tide-native-json-parsing t)
+ '(tide-server-max-response-length 524288)
  '(tide-tsserver-executable "node_modules/.bin/tsserver")
  '(tide-user-preferences
    '(:includeCompletionsForModuleExports nil :includeCompletionsWithInsertText t :allowTextChangesInNewFiles t))
