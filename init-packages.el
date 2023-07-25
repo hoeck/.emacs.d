@@ -64,10 +64,9 @@
  'helm-core
  'helm-dash
  'helm-projectile
- 'helm-swoop
+ ;; 'helm-swoop
  'highlight-symbol
  ;; 'idle-highlight
- 'iter2 ;; required by prettier.el
  'js2-mode
  'js3-mode
  'json-mode
@@ -78,12 +77,12 @@
  'markdown-mode+
  ;; 'minimap
  'multiple-cursors
- 'nvm ;; required by prettier.el
  'neotree
  'nyan-mode
  'php-mode
  'pkg-info
  'popup
+ 'prettier ;; https://github.com/jscheid/prettier.el
  'projectile
  ;; 'queue -- obsolete?
  'racer
@@ -511,13 +510,6 @@ See URL `https://palantir.github.io/tslint/'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; smartparens
 (require 'smartparens-config)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; prettier integration
-;;;
-;;(add-to-list 'load-path "~/.emacs.d/extern/prettier.el")
-(load "~/.emacs.d/extern/prettier.el/prettier.el")
-;; enable globally with: (add-hook 'after-init-hook #'global-prettier-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; tide (typescript ide) mode

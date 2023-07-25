@@ -85,7 +85,7 @@
  '(org-outline-path-complete-in-steps nil)
  '(org-refile-use-outline-path t)
  '(package-selected-packages
-   '(elm-mode string-inflection yasnippet yaml-mode wgrep-helm wgrep web-mode vimish-fold tide tagedit tabbar sr-speedbar smartparens shackle scss-mode racer php-mode neotree nvm multiple-cursors magit-popup magit json-mode js2-mode helm-projectile helm-dash haskell-mode go-mode git-commit flycheck-rust flycheck f dockerfile-mode default-text-scale dash csharp-mode color-theme coffee-mode browse-kill-ring bm all-the-icons helm-swoop spinner unicode-fonts iter2 flymake-easy sql-indent scala-mode2 nyan-mode minimap markdown-mode+ js3-mode idle-highlight highlight-symbol flymake-python-pyflakes egg company-racer color-theme-railscasts clojurescript-mode buffer-move autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider))
+   '(prettier elm-mode string-inflection yasnippet yaml-mode wgrep-helm wgrep web-mode vimish-fold tide tagedit tabbar sr-speedbar smartparens shackle scss-mode racer php-mode neotree nvm multiple-cursors magit-popup magit json-mode js2-mode helm-projectile helm-dash haskell-mode go-mode git-commit flycheck-rust flycheck f dockerfile-mode default-text-scale dash csharp-mode color-theme coffee-mode browse-kill-ring bm all-the-icons helm-swoop spinner unicode-fonts iter2 flymake-easy sql-indent scala-mode2 nyan-mode minimap markdown-mode+ js3-mode idle-highlight highlight-symbol flymake-python-pyflakes egg company-racer color-theme-railscasts clojurescript-mode buffer-move autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider))
  '(prettier-js-command "prettier")
  '(prettier-mode-sync-config-flag nil)
  '(projectile-enable-caching t)
@@ -124,7 +124,7 @@
  '(tide-disable-suggestions t)
  '(tide-native-json-parsing t)
  '(tide-server-max-response-length 524288)
- '(tide-tsserver-executable "node_modules/.bin/tsserver")
+ '(tide-tsserver-executable nil)
  '(tide-user-preferences
    '(:includeCompletionsForModuleExports nil :includeCompletionsWithInsertText t :allowTextChangesInNewFiles t))
  '(tramp-auto-save-directory "~/.emacs.d/tramp_backups")
