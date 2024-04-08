@@ -67,9 +67,6 @@
  ;; 'helm-swoop
  'highlight-symbol
  ;; 'idle-highlight
- 'js2-mode
- 'js3-mode
- 'json-mode
  'let-alist
  'magit
  'magit-popup
@@ -99,10 +96,8 @@
  'tabbar
  'tagedit
  'tide
- 'typescript-mode
  'unicode-fonts
  'vimish-fold
- 'web-mode
  'wgrep
  'wgrep-helm
  'with-editor
@@ -192,24 +187,6 @@
 (yas/load-directory yas/root-directory)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; javascript
-
-;; I used to use flymake, but now its jscs + jshint. flycheck works
-;; flawlessly with two linters, so I don't need flymake any more.
-;; (add-hook 'js2-mode-hook 'flymake-jshint-load)
-
-;; keep j3 mode around though, just don't autoload it
-;; see http://www.emacswiki.org/emacs/ELPA for how to configuring ELPA packages
-(eval-after-load "js3-mode-autoloads"
-  '(progn
-     (setq auto-mode-alist (delete (rassoc 'js3-mode auto-mode-alist) auto-mode-alist))))
-
-(eval-after-load "js2-mode-autoloads"
-  '(progn
-     (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
-     (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; (my)sql-completion
 ;; disabled for now, does not work so well
 ;; (require 'sql-completion)
@@ -295,37 +272,6 @@
 ;; Flycheck
 (require 'flycheck)
 
-;;; custom eshint definition without source-inplace to not disturb the grunt
-;;; watch process with generating temporary files
-
-(flycheck-define-checker javascript-eslint-custom
-  "A Javascript syntax and style checker using eslint.
-
-See URL `https://github.com/eslint/eslint'."
-  :command ("eslint" "--format=checkstyle"
-            (config-file "--config" flycheck-eslintrc)
-            source)
-  :error-parser flycheck-parse-checkstyle
-  :error-filter (lambda (errors)
-                  (mapc (lambda (err)
-                          ;; Parse error ID from the error message
-                          (setf (flycheck-error-message err)
-                                (replace-regexp-in-string
-                                 (rx " ("
-                                     (group (one-or-more (not (any ")"))))
-                                     ")" string-end)
-                                 (lambda (s)
-                                   (setf (flycheck-error-id err)
-                                         (match-string 1 s))
-                                   "")
-                                 (flycheck-error-message err))))
-                        (flycheck-sanitize-errors errors))
-                  errors)
-  :modes (js-mode js2-mode js3-mode))
-
-(add-to-list 'flycheck-disabled-checkers 'javascript-eslint)
-(add-to-list 'flycheck-checkers 'javascript-eslint-custom)
-
 ;; use the projects eslint if available (in node_modules)
 (defun use-eslint-from-node-modules ()
   (let* ((root (locate-dominating-file
@@ -339,99 +285,6 @@ See URL `https://github.com/eslint/eslint'."
       (setq-local flycheck-javascript-eslint-custom-executable eslint))))
 
 (add-hook 'flycheck-mode-hook #'use-eslint-from-node-modules)
-
-;; custom tslint checker (forgot why I actually did this: I was initially
-;; supporting the --project option to configure tslint via tsconfig.json but
-;; that stopped working after a typescript update so I'm now back to plain
-;; tslint.json config and it still works like I expect it)
-(flycheck-def-config-file-var flycheck-typescript-tslint-custom-tslint-json typescript-tslint "tslint.json"
-  :safe #'stringp)
-
-(flycheck-define-checker typescript-tslint-custom
-  "A Typescript syntax and style checker using eslint.
-
-See URL `https://palantir.github.io/tslint/'."
-  :command ("tslint"
-            "--format" "checkstyle"
-            ;; Note: --type-check does not work when linting single only files, as
-            ;; flycheck does it on save need to use a commandline task for
-            ;; that or use https://github.com/angelozerr/tslint-language-service
-            ;; (integrates tslint it into tsserver and makes flycheck-tslint obsolete)
-            (config-file "--config" flycheck-typescript-tslint-custom-tslint-json)
-            source)
-  :error-parser (lambda (output checker buffer)
-                  ;; remove everything (tslint warnings) before the opening xml tag
-                  ;; you get these warnings when using any rules that require --type-check
-                  (let ((output-without-warnings (replace-regexp-in-string "\\(.\\|\n\\)*<?xml version=\"" "<?xml version=\"" output)))
-                    (flycheck-parse-checkstyle output-without-warnings checker buffer)))
-  :error-filter (lambda (errors)
-                  (mapc (lambda (err)
-                          ;; Parse error ID from the error message
-                          (setf (flycheck-error-message err)
-                                (replace-regexp-in-string
-                                 (rx " ("
-                                     (group (one-or-more (not (any ")"))))
-                                     ")" string-end)
-                                 (lambda (s)
-                                   (setf (flycheck-error-id err)
-                                         (match-string 1 s))
-                                   "")
-                                 (flycheck-error-message err))))
-                        (flycheck-sanitize-errors errors))
-                  errors)
-  :modes (tide-mode typescript-mode web-mode))
-
-(add-to-list 'flycheck-checkers 'typescript-tslint-custom)
-
-;; use the projects tslint if available (in node_modules)
-(defun use-tslint-from-node-modules ()
-  (let* ((root (locate-dominating-file
-                (or (buffer-file-name) default-directory)
-                "node_modules"))
-         (tslint (and root
-                      (expand-file-name "node_modules/.bin/tslint"
-                                        root))))
-    (when (file-executable-p tslint)
-      (setq-local flycheck-typescript-tslint-custom-executable tslint))))
-
-(add-hook 'flycheck-mode-hook #'use-tslint-from-node-modules)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Tern (http://ternjs.net)
-
-;; (add-to-list 'load-path "~/src/tern/emacs/")
-;; (autoload 'tern-mode "tern.el" nil t)
-
-;; (eval-after-load 'tern
-;;    '(progn
-;;       (require 'tern-auto-complete)
-;;       (tern-ac-setup)))
-;;
-;; (add-hook 'js2-mode-hook (lambda () (tern-mode t)))
-
-;; The Emacs mode uses the bin/tern server, and project configuration is done
-;; with a .tern-project file.
-;;
-;; Buffers in tern-mode add a completion-at-point function that activates Tern’s
-;; completion. So, unless you rebound the key, M-tab (or C-M-i) will trigger
-;; completion.
-;;
-;; When the point is in an argument list, Tern will show argument names and types
-;; at the bottom of the screen.
-;;
-;; The following additional keys are bound:
-;;
-;; M-.     .. Jump to the definition of the thing under the cursor.
-;; M-,     .. Brings you back to last place you were when you pressed M-..
-;; C-c C-r .. Rename the variable under the cursor.
-;; C-c C-c .. Find the type of the thing under the cursor.
-;; C-c C-d .. Find docs of the thing under the cursor. Press again to open the associated URL (if any).
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Shackle (https://github.com/wasamasa/shackle)
-;; enforce rules for popup windows
-;; does not work with helms built-in documentation via C-c ? or C-h m
-;; (require 'shackle)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; rust-mode
@@ -512,8 +365,46 @@ See URL `https://palantir.github.io/tslint/'."
 (require 'smartparens-config)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; treesitter
+(add-to-list 'auto-mode-alist '("\\.ts$" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx$" . tsx-ts-mode))
+
+;; lang definitions picked up by 'M-x treesit-install-language-grammar'
+;; see https://gist.github.com/slewsys/4ee95a67577e4df64d5f716c30420555
+;; and https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+(setq treesit-language-source-alist
+   '((bash       "https://github.com/tree-sitter/tree-sitter-bash")
+     (c          "https://github.com/tree-sitter/tree-sitter-c/" "master" "src")
+     (clojure    "https://github.com/sogaiu/tree-sitter-clojure" "master" "src")
+     (cpp        "https://github.com/tree-sitter/tree-sitter-cpp/" "master" "src")
+     (cmake      "https://github.com/uyha/tree-sitter-cmake")
+     (css        "https://github.com/tree-sitter/tree-sitter-css")
+     (dockerfile "file:///opt/src/github/tree-sitter-dockerfile" "main" "src")
+     (elisp      "https://github.com/Wilfred/tree-sitter-elisp")
+     (elixir     "https://github.com/elixir-lang/tree-sitter-elixir" "main" "src")
+     (erlang     "https://github.com/WhatsApp/tree-sitter-erlang" "main" "src")
+     (go         "https://github.com/tree-sitter/tree-sitter-go")
+     (haskell    "https://github.com/tree-sitter/tree-sitter-haskell" "master" "src")
+     (html       "https://github.com/tree-sitter/tree-sitter-html")
+     (java       "https://github.com/tree-sitter/tree-sitter-java" "master" "src")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+     (json       "https://github.com/tree-sitter/tree-sitter-json")
+     (julia      "https://github.com/tree-sitter/tree-sitter-julia" "master" "src")
+     (lua        "https://github.com/MunifTanjim/tree-sitter-lua" "main" "src")
+     (make       "https://github.com/alemuller/tree-sitter-make")
+     (markdown   "https://github.com/ikatyang/tree-sitter-markdown")
+     (meson      "https://github.com/Decodetalkers/tree-sitter-meson" "master" "src")
+     (perl       "file:///opt/src/github/tree-sitter-perl" "master" "src")
+     (python     "https://github.com/tree-sitter/tree-sitter-python")
+     (ruby       "https://github.com/tree-sitter/tree-sitter-ruby" "master" "src")
+     (rust       "https://github.com/tree-sitter/tree-sitter-rust" "master" "src")
+     (toml       "https://github.com/tree-sitter/tree-sitter-toml")
+     (tsx        "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+     (yaml       "https://github.com/ikatyang/tree-sitter-yaml")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; tide (typescript ide) mode
-(require 'typescript-mode)
 (require 'tide)
 
 ;; aligns annotation to the right hand side
@@ -532,27 +423,14 @@ See URL `https://palantir.github.io/tslint/'."
   (tide-hl-identifier-mode +1)
   (company-mode +1))
 
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
+;; hook on treesitter typescript modes
+(add-hook 'typescript-ts-mode-hook #'setup-tide-mode)
+(add-hook 'tsx-ts-mode-hook #'setup-tide-mode)
 
 ;; put tslint as the last one into the chain of fly-checkers, but only if
 ;; compilation did not produce any warnings
-(flycheck-add-next-checker 'tsx-tide '(warning . typescript-tslint-custom))
-(flycheck-add-next-checker 'typescript-tide '(warning . typescript-tslint-custom))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; web-mode
-(require 'web-mode)
-
-;; js + tsx support
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-
-(defun custom-web-mode-typescript-hook ()
-  (when (and (equal web-mode-content-type "jsx")
-             (string-match-p "\\.tsx$" buffer-file-name))
-    (setup-tide-mode)))
-
-(add-hook 'web-mode-hook  'custom-web-mode-typescript-hook)
+(flycheck-add-next-checker 'tsx-tide '(warning . javascript-eslint))
+(flycheck-add-next-checker 'typescript-tide '(warning . javascript-eslint))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; sensible unique buffer names
@@ -589,19 +467,8 @@ See URL `https://palantir.github.io/tslint/'."
                :face all-the-icons-blue))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; json-mode
-(require 'json-mode)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; mode for editing Dockerfiles
 (require 'dockerfile-mode)
-
-(defun setup-json-mode-hook ()
-  ;; js2-basic-offset is 4 for all my js stuff but json is mostly
-  ;; package.json, tsconfig.json which always uses 2-space indentation
-  (setq-local js-indent-level 2))
-
-(add-hook 'json-mode-hook  'setup-json-mode-hook)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; better unicode font configuration (so i can see unicode symbols)

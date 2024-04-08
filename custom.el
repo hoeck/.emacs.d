@@ -26,6 +26,7 @@
  '(default-input-method "rfc1345")
  '(default-text-scale-amount 20)
  '(display-battery-mode t)
+ '(electric-indent-mode t)
  '(espresso-expr-indent-offset 4)
  '(espresso-indent-level 4)
  '(ethan-wspace-errors '(many-nls-eof no-nl-eof eol))
@@ -45,6 +46,7 @@
  '(flymake-jslint-detect-trailing-comma t)
  '(global-flycheck-mode nil)
  '(global-font-lock-mode t nil (font-lock))
+ '(global-prettier-mode t)
  '(haskell-mode-hook
    '(capitalized-words-mode turn-on-haskell-decl-scan turn-on-haskell-doc turn-on-haskell-indent))
  '(helm-buffer-details-flag nil)
@@ -56,14 +58,6 @@
  '(ido-everywhere nil)
  '(ido-mode 'both nil (ido))
  '(ipython-command "ipython")
- '(js-auto-indent-flag nil)
- '(js-expr-indent-offset 4)
- '(js2-global-externs '("angular" "_"))
- '(js2-indent-switch-body t)
- '(js2-strict-inconsistent-return-warning nil)
- '(js2-strict-missing-semi-warning nil)
- '(js2-strict-trailing-comma-warning nil)
- '(js3-indent-level 4)
  '(list-matching-lines-default-context-lines 1)
  '(neo-confirm-change-root 'off-p)
  '(neo-confirm-create-directory 'off-p)
@@ -85,7 +79,7 @@
  '(org-outline-path-complete-in-steps nil)
  '(org-refile-use-outline-path t)
  '(package-selected-packages
-   '(prettier elm-mode string-inflection yasnippet yaml-mode wgrep-helm wgrep web-mode vimish-fold tide tagedit tabbar sr-speedbar smartparens shackle scss-mode racer php-mode neotree nvm multiple-cursors magit-popup magit json-mode js2-mode helm-projectile helm-dash haskell-mode go-mode git-commit flycheck-rust flycheck f dockerfile-mode default-text-scale dash csharp-mode color-theme coffee-mode browse-kill-ring bm all-the-icons helm-swoop spinner unicode-fonts iter2 flymake-easy sql-indent scala-mode2 nyan-mode minimap markdown-mode+ js3-mode idle-highlight highlight-symbol flymake-python-pyflakes egg company-racer color-theme-railscasts clojurescript-mode buffer-move autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider))
+   '(pkg-info epl prettier elm-mode string-inflection yasnippet yaml-mode wgrep-helm wgrep vimish-fold tide tagedit tabbar sr-speedbar smartparens shackle scss-mode racer php-mode neotree nvm multiple-cursors magit-popup magit helm-projectile helm-dash haskell-mode go-mode git-commit flycheck-rust flycheck f dockerfile-mode default-text-scale dash csharp-mode color-theme coffee-mode browse-kill-ring bm all-the-icons helm-swoop spinner unicode-fonts iter2 flymake-easy sql-indent scala-mode2 nyan-mode minimap markdown-mode+ idle-highlight highlight-symbol flymake-python-pyflakes egg company-racer color-theme-railscasts clojurescript-mode buffer-move autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider))
  '(prettier-js-command "prettier")
  '(prettier-mode-sync-config-flag nil)
  '(projectile-enable-caching t)
@@ -110,10 +104,6 @@
  '(sp-base-key-bindings 'paredit)
  '(sql-pop-to-buffer-after-send-region nil)
  '(sql-product 'mysql)
- '(swank-clojure-classpath
-   (list "~/clj/clojure/clojure.jar" "~/clj/clojure-contrib/clojure-contrib.jar" "~/clj/swank-clojure/src/" "~/clj/neo4j-clojure/src" "~/src/neo4j-kernel-1.0-rc/*" "~/clj/clj-pivot/src" "~/clj/clj-pivot/classes" "~/clj/clj-pivot/examples/src" "~/clj/clj-pivot/examples/snippets" "~/clj/clj-pivot/icons" "~/src/apache-pivot-1.5/lib/*" "~/clj/tmp" "~/clj/spreadsheet-repl/src" "/usr/lib/jvm/java-6-sun/lib/tools.jar" "~/clj/clj-debug/src" "~/qm/src/" "~/clj/compojure/compojure.jar" "~/clj/compojure/deps/*" "~/clj/Clojure-yahoo-finance/lib/*" "~/clj/scriptjure/src" "~/clj/clojure-jna/src" "~/clj/cdc/src" "~/src/jnotify-src/jnotify/build/output/jnotify-0.93-PATCH.jar" "/usr/share/java/mysql.jar" "~/clj/metatron-experimental/src" "~/clj/metatron-experimental/build" "~/clj/criterium/src"))
- '(swank-clojure-extra-vm-args
-   (list "-Xmx512M" "-Xdebug" "-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8888" "-Djava.ext.dirs=/usr/share/java"))
  '(table-cell-intersection-char 43)
  '(table-cell-vertical-char 124)
  '(tail-raise nil)
@@ -128,18 +118,9 @@
  '(tide-user-preferences
    '(:includeCompletionsForModuleExports nil :includeCompletionsWithInsertText t :allowTextChangesInNewFiles t))
  '(tramp-auto-save-directory "~/.emacs.d/tramp_backups")
- '(typescript-indent-level 4)
  '(uniquify-after-kill-buffer-p nil)
  '(uniquify-buffer-name-style 'forward nil (uniquify))
- '(uniquify-min-dir-content 1)
- '(web-mode-code-indent-offset 4)
- '(web-mode-css-indent-offset 2)
- '(web-mode-enable-auto-indentation nil)
- '(web-mode-enable-auto-opening nil)
- '(web-mode-enable-auto-pairing nil)
- '(web-mode-enable-auto-quoting nil)
- '(web-mode-enable-control-block-indentation nil)
- '(web-mode-markup-indent-offset 4))
+ '(uniquify-min-dir-content 1))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
