@@ -59,6 +59,7 @@
  'flymake-python-pyflakes
  'git-commit
  'go-mode
+ 'gptel ;; api keys defined in ~/.authinfo
  'haskell-mode
  'helm
  'helm-core
@@ -404,6 +405,16 @@
      (yaml       "https://github.com/ikatyang/tree-sitter-yaml")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; prettier
+;; make json work in emacs own js-json-mode (which seems to be the default for json files)
+;; without this, prettier will try to format the buffer as Javascript and fail
+;; see https://github.com/jscheid/prettier.el/issues/115
+(require 'prettier)
+(add-to-list 'prettier-major-mode-parsers
+             `(js-json-mode . ,(cdr (assoc 'json-mode prettier-major-mode-parsers))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; tide (typescript ide) mode
 (require 'tide)
 
@@ -489,3 +500,10 @@
        mode-line-modes
        mode-line-end-spaces
        mode-line-position))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; claude model for gptel
+;; api key lives in ~/.authinfo
+(gptel-make-anthropic "Claude"
+  :stream t
+  :key 'gptel-api-key)

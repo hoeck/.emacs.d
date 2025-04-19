@@ -7,13 +7,11 @@
  '(backup-directory-alist '((".*" . "~/.emacs.d/backups/")))
  '(bm-electric-show nil)
  '(c-default-style
-   '((c-mode . "cc-mode")
-     (c++-mode . "cc-mode")
-     (java-mode . "java")
-     (awk-mode . "awk")
-     (other . "gnu")))
+   '((c-mode . "cc-mode") (c++-mode . "cc-mode") (java-mode . "java")
+     (awk-mode . "awk") (other . "gnu")))
  '(c-offsets-alist
-   '((brace-list-intro first c-lineup-2nd-brace-entry-in-arglist c-lineup-class-decl-init-+ +)))
+   '((brace-list-intro first c-lineup-2nd-brace-entry-in-arglist
+                       c-lineup-class-decl-init-+ +)))
  '(case-fold-search t)
  '(coffee-tab-width 2)
  '(column-number-mode t)
@@ -34,21 +32,38 @@
  '(fill-column 78)
  '(flycheck-check-syntax-automatically '(save mode-enabled))
  '(flycheck-checkers
-   '(ada-gnat asciidoc c/c++-clang c/c++-gcc c/c++-cppcheck cfengine chef-foodcritic coffee coffee-coffeelint coq css-csslint d-dmd emacs-lisp emacs-lisp-checkdoc erlang eruby-erubis fortran-gfortran go-gofmt go-golint go-vet go-build go-test go-errcheck groovy haml handlebars haskell-stack-ghc haskell-ghc haskell-hlint html-tidy jade javascript-jshint javascript-eslint javascript-gjslint javascript-jscs javascript-standard json-jsonlint json-python-json less luacheck lua perl perl-perlcritic php php-phpmd php-phpcs puppet-parser puppet-lint python-flake8 python-pylint python-pycompile r-lintr racket rpm-rpmlint rst-sphinx rst ruby-rubocop ruby-rubylint ruby ruby-jruby rust sass scala scala-scalastyle scss-lint scss sh-bash sh-posix-dash sh-posix-bash sh-zsh sh-shellcheck slim sql-sqlint tex-chktex tex-lacheck texinfo verilog-verilator xml-xmlstarlet xml-xmllint yaml-jsyaml yaml-ruby))
+   '(ada-gnat asciidoc c/c++-clang c/c++-gcc c/c++-cppcheck cfengine
+              chef-foodcritic coffee coffee-coffeelint coq css-csslint d-dmd
+              emacs-lisp emacs-lisp-checkdoc erlang eruby-erubis
+              fortran-gfortran go-gofmt go-golint go-vet go-build go-test
+              go-errcheck groovy haml handlebars haskell-stack-ghc haskell-ghc
+              haskell-hlint html-tidy jade javascript-jshint javascript-eslint
+              javascript-gjslint javascript-jscs javascript-standard
+              json-jsonlint json-python-json less luacheck lua perl
+              perl-perlcritic php php-phpmd php-phpcs puppet-parser
+              puppet-lint python-flake8 python-pylint python-pycompile r-lintr
+              racket rpm-rpmlint rst-sphinx rst ruby-rubocop ruby-rubylint
+              ruby ruby-jruby rust sass scala scala-scalastyle scss-lint scss
+              sh-bash sh-posix-dash sh-posix-bash sh-zsh sh-shellcheck slim
+              sql-sqlint tex-chktex tex-lacheck texinfo verilog-verilator
+              xml-xmlstarlet xml-xmllint yaml-jsyaml yaml-ruby))
  '(flycheck-coffee-coffeelint-executable "/home/erik/heavygoods/node_modules/.bin/coffeelint")
  '(flycheck-disabled-checkers '(javascript-jshint javascript-jscs))
  '(flycheck-eslintrc ".eslintrc")
  '(flycheck-jscs ".jscsrc")
  '(flycheck-temp-prefix ".flycheck")
  '(flymake-jslint-args
-   '("--white" "--unparam" "--todo" "--nomen" "--regexp" "--plusplus" "--bitwise" "--browser" "--nomen" "--predef" "$" "--predef" "jQuery" "--maxerror" "16"))
+   '("--white" "--unparam" "--todo" "--nomen" "--regexp" "--plusplus" "--bitwise"
+     "--browser" "--nomen" "--predef" "$" "--predef" "jQuery" "--maxerror"
+     "16"))
  '(flymake-jslint-command "jslint")
  '(flymake-jslint-detect-trailing-comma t)
  '(global-flycheck-mode nil)
  '(global-font-lock-mode t nil (font-lock))
  '(global-prettier-mode t)
  '(haskell-mode-hook
-   '(capitalized-words-mode turn-on-haskell-decl-scan turn-on-haskell-doc turn-on-haskell-indent))
+   '(capitalized-words-mode turn-on-haskell-decl-scan turn-on-haskell-doc
+                            turn-on-haskell-indent))
  '(helm-buffer-details-flag nil)
  '(helm-candidate-number-limit 500)
  '(helm-mm-matching-method 'multi2)
@@ -58,6 +73,7 @@
  '(ido-everywhere nil)
  '(ido-mode 'both nil (ido))
  '(ipython-command "ipython")
+ '(js-indent-level 2)
  '(list-matching-lines-default-context-lines 1)
  '(neo-confirm-change-root 'off-p)
  '(neo-confirm-create-directory 'off-p)
@@ -79,12 +95,32 @@
  '(org-outline-path-complete-in-steps nil)
  '(org-refile-use-outline-path t)
  '(package-selected-packages
-   '(pkg-info epl prettier elm-mode string-inflection yasnippet yaml-mode wgrep-helm wgrep vimish-fold tide tagedit tabbar sr-speedbar smartparens shackle scss-mode racer php-mode neotree nvm multiple-cursors magit-popup magit helm-projectile helm-dash haskell-mode go-mode git-commit flycheck-rust flycheck f dockerfile-mode default-text-scale dash csharp-mode color-theme coffee-mode browse-kill-ring bm all-the-icons helm-swoop spinner unicode-fonts iter2 flymake-easy sql-indent scala-mode2 nyan-mode minimap markdown-mode+ idle-highlight highlight-symbol flymake-python-pyflakes egg company-racer color-theme-railscasts clojurescript-mode buffer-move autopair auto-highlight-symbol ace-jump-mode ac-nrepl ac-cider))
+   '(ac-cider ac-nrepl ace-jump-mode all-the-icons auto-highlight-symbol autopair
+              bm browse-kill-ring buffer-move clojurescript-mode coffee-mode
+              color-theme color-theme-railscasts company-racer csharp-mode
+              dash default-text-scale dockerfile-mode egg elm-mode epl f
+              flycheck flycheck-rust flymake-easy flymake-python-pyflakes
+              git-commit go-mode gptel haskell-mode helm-dash helm-projectile
+              helm-swoop highlight-symbol idle-highlight iter2 magit
+              magit-popup markdown-mode+ minimap multiple-cursors neotree nvm
+              nyan-mode php-mode pkg-info prettier racer scala-mode2 scss-mode
+              shackle smartparens spinner sql-indent sr-speedbar
+              string-inflection tabbar tagedit tide unicode-fonts vimish-fold
+              vue-mode wgrep wgrep-helm yaml-mode yasnippet))
+ '(prettier-enabled-parsers
+   '(angular babel babel-flow babel-ts css elm espree flow graphql java json
+             json5 json-stringify less lua html markdown mdx meriyah php
+             postgresql pug python ruby scss sh solidity svelte swift toml
+             typescript vue xml yaml))
+ '(prettier-infer-parser-flag t)
  '(prettier-js-command "prettier")
  '(prettier-mode-sync-config-flag nil)
  '(projectile-enable-caching t)
  '(projectile-project-root-files
-   '("rebar.config" "project.clj" "SConstruct" "pom.xml" "build.sbt" "build.gradle" "Gemfile" "requirements.txt" "setup.py" "tox.ini" "package.json" "gulpfile.js" "Gruntfile.js" "bower.json" "composer.json" "Cargo.toml" "mix.exs" "main.js"))
+   '("rebar.config" "project.clj" "SConstruct" "pom.xml" "build.sbt"
+     "build.gradle" "Gemfile" "requirements.txt" "setup.py" "tox.ini"
+     "package.json" "gulpfile.js" "Gruntfile.js" "bower.json" "composer.json"
+     "Cargo.toml" "mix.exs" "main.js"))
  '(projectile-project-root-files-bottom-up '(".projectile" ".git" ".hg" ".fslckout" ".bzr" "_darcs"))
  '(projectile-use-git-grep t)
  '(py-align-multiline-strings-p t)
@@ -116,7 +152,8 @@
  '(tide-server-max-response-length 524288)
  '(tide-tsserver-executable nil)
  '(tide-user-preferences
-   '(:includeCompletionsForModuleExports nil :includeCompletionsWithInsertText t :allowTextChangesInNewFiles t))
+   '(:includeCompletionsForModuleExports nil :includeCompletionsWithInsertText t
+                                         :allowTextChangesInNewFiles t))
  '(tramp-auto-save-directory "~/.emacs.d/tramp_backups")
  '(uniquify-after-kill-buffer-p nil)
  '(uniquify-buffer-name-style 'forward nil (uniquify))
