@@ -247,6 +247,10 @@
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 (global-set-key (kbd "M-x") #'helm-M-x)
 
+;; open grep lines in another window by default instead of the same window as the grep buffer
+(define-key helm-grep-mode-map (kbd "RET") 'helm-grep-mode-jump-other-window) ;; defaults to 'helm-grep-mode-jump
+(define-key helm-grep-mode-map (kbd "C-<return>") 'helm-grep-mode-jump)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Projectile - Project Interaction Library
 ;; https://github.com/bbatsov/projectile
@@ -336,12 +340,25 @@
 
 (define-key my-keys-minor-mode-map (kbd "C-c C-n") 'neotree-force-find)
 
+(defun neotree-helm-do-grep-ag (arg)
+  "`helm-do-grep-ag but in the directory the cursor is under in neotree"
+  (interactive "P")
+  (require 'helm-files)
+  (let* ((current-file-or-dir (with-current-buffer (neo-global--get-buffer)
+                               (neo-buffer--get-filename-current-line)))
+         (current-dir (if (file-directory-p current-file-or-dir)
+                          current-file-or-dir
+                        (file-name-directory current-file-or-dir))))
+    (helm-grep-ag current-dir arg)))
+
 (defun setup-neotree-mode ()
   ;; disable my conflicting keymaps inside neotree
   (my-keys-minor-mode 0)
   ;; turn of tooltips in neotree, they are useless, annoying and cause
   ;; rendering glitches
-  (tooltip-mode 0))
+  (tooltip-mode 0)
+  ;; helm-grep-in-dir neotree edition
+  (define-key neotree-mode-map (kbd "f") 'neotree-helm-do-grep-ag))
 
 (add-hook 'neotree-mode-hook #'setup-neotree-mode)
 
