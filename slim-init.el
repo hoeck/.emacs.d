@@ -8,7 +8,7 @@
 ;;;
 
 (defvar slim-init t)
-(load "/home/soehnel/.emacs.d/init.el" t t)
+(load "~/.emacs.d/init.el" t t)
 
 
 ;; slim custom settings
