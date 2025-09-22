@@ -13,6 +13,7 @@
    '((brace-list-intro first c-lineup-2nd-brace-entry-in-arglist
                        c-lineup-class-decl-init-+ +)))
  '(case-fold-search t)
+ '(claude-code-terminal-backend 'vterm)
  '(coffee-tab-width 2)
  '(column-number-mode t)
  '(comint-history-isearch 'dwim)
@@ -95,18 +96,18 @@
  '(org-outline-path-complete-in-steps nil)
  '(org-refile-use-outline-path t)
  '(package-selected-packages
-   '(ac-cider ac-nrepl ace-jump-mode all-the-icons auto-highlight-symbol autopair
-              bm browse-kill-ring buffer-move clojurescript-mode coffee-mode
-              color-theme color-theme-railscasts company-racer csharp-mode
-              dash default-text-scale dockerfile-mode egg elm-mode epl f
-              flycheck flycheck-rust flymake-easy flymake-python-pyflakes
-              git-commit go-mode gptel haskell-mode helm-dash helm-projectile
-              helm-swoop highlight-symbol idle-highlight iter2 magit
-              magit-popup markdown-mode+ minimap multiple-cursors neotree nvm
-              nyan-mode php-mode pkg-info prettier racer scala-mode2 scss-mode
-              shackle smartparens spinner sql-indent sr-speedbar
+   '(ac-cider ace-jump-mode all-the-icons auto-highlight-symbol autopair bm
+              browse-kill-ring buffer-move claude-code coffee-mode color-theme
+              company-racer csharp-mode default-text-scale dockerfile-mode egg
+              elm-mode flycheck-rust flymake-python-pyflakes go-mode
+              haskell-mode helm-dash helm-projectile helm-swoop
+              highlight-symbol json-snatcher magit magit-popup markdown-mode+
+              multiple-cursors neotree nyan-mode php-mode pkg-info prettier
+              racer scss-mode shackle smartparens sql-indent sr-speedbar
               string-inflection tabbar tagedit tide unicode-fonts vimish-fold
-              vue-mode wgrep wgrep-helm yaml-mode yasnippet))
+              vterm vue-mode wgrep-helm yaml-mode yasnippet))
+ '(package-vc-selected-packages
+   '((claude-code :url "https://github.com/stevemolitor/claude-code.el")))
  '(prettier-enabled-parsers
    '(angular babel babel-flow babel-ts css elm espree flow graphql java json
              json5 json-stringify less lua html markdown mdx meriyah php

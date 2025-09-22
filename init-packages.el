@@ -59,7 +59,6 @@
  'flymake-python-pyflakes
  'git-commit
  'go-mode
- 'gptel ;; api keys defined in ~/.authinfo
  'haskell-mode
  'helm
  'helm-core
@@ -99,6 +98,7 @@
  'tide
  'unicode-fonts
  'vimish-fold
+ 'vterm ; required for claude-code.el
  'wgrep
  'wgrep-helm
  'with-editor
@@ -519,8 +519,25 @@
        mode-line-position))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; claude model for gptel
-;; api key lives in ~/.authinfo
-(gptel-make-anthropic "Claude"
-  :stream t
-  :key 'gptel-api-key)
+;;; claude-code.el
+;; - using https://github.com/musistudio/claude-code-router as a proxy
+;;   start via `ccr start`, configure via `ccr ui`
+;; - ccr credentials come via ANTHROPIC_BASE_URL and ANTHROPIC_API_KEY which
+;;   are defined in .bashrc so the `claude` command can pick them up
+(use-package claude-code :ensure t
+  ;; not available on melpa, only via direct git download
+  ;; should use a depth of 1 as the repo is pretty large but I have no idea
+  ;; how to tell this to `vc`
+  :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
+  :config
+  ;; optional IDE integration with Monet
+  ;; (add-hook 'claude-code-process-environment-functions #'monet-start-server-function)
+  ;; (monet-mode 1)
+
+  (claude-code-mode)
+  :bind-keymap ("C-c c" . claude-code-command-map)
+
+  ;; Optionally define a repeat map so that "M" will cycle thru Claude auto-accept/plan/confirm modes after invoking claude-code-cycle-mode / C-c M.
+  ;; :bind
+  ;; (:repeat-map my-claude-code-map ("M" . claude-code-cycle-mode))
+  )
