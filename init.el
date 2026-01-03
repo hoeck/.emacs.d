@@ -15,6 +15,10 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
+;; set default font for this frame an all inherited frames
+;; hint: use "C-u C-x =" on any character to find out its font
+(set-frame-font "Source Code Pro 10" nil t)
+
 ;; eat up all whitespace when pressing C-d
 ;;(c-toggle-hungry-state 1)
 
